@@ -9,12 +9,12 @@
                 <button @click="userLogout" id="logout">Log Out</button>
             </div>
             <div id="user-container">
-                 <h2>Who to Follow</h2>
+                <h2>Who to Follow</h2>
                 <view-all-users id="users"></view-all-users>
             </div>
             <div id="tweet-container">
                 <h2>Discover</h2>
-                <!-- <view-all-tweets id="tweets"></view-all-tweets> -->
+                <view-all-tweets id="tweets"></view-all-tweets>
             </div>
            
             <div id="delete-account">
@@ -37,13 +37,13 @@
 <script>
 
 import cookies from 'vue-cookies'
-// import ViewAllTweets from '../components/ViewAllTweets.vue'
+import ViewAllTweets from '../components/ViewAllTweets.vue'
 import ViewAllUsers from '../components/ViewAllUsers.vue'
 // import DeleteProfile from '../components/DeleteProfile.vue'
 
     export default {
         components: {
-            // ViewAllTweets,
+            ViewAllTweets,
             ViewAllUsers,
             // DeleteProfile
         },
