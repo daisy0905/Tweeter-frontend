@@ -37,7 +37,6 @@ export default new Vuex.Store({
     updateUser: function(state, data) {
       state.users = data;
     },
-
   },
   actions: {
     getProfile: function(state) {
@@ -61,14 +60,13 @@ export default new Vuex.Store({
 
     getTweets: function(context) {
       axios.request({
-        url: "https://tweeterest.ml/api/tweets",
+        url: "http://127.0.0.1:5000/tweets",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "X-Api-Key": "NvrMZ9Fj0jRrjYf2As0M7gpnhYC7k4ltci5mZkZGGeY2G"
         },
         params: {
-            userId: cookies.get("userId"),
+            id: cookies.get("userId"),
         }
       }).then((response) => {
         context.commit("updateTweets", response.data),
@@ -116,7 +114,7 @@ export default new Vuex.Store({
           "Content-Type": "application/json",
         },
         params: {
-          user_id: cookies.get("userId"),
+          user_id: cookies.get("otherId"),
         }
       }).then((response) => {
         state.commit("updateFollow", response.data),
@@ -127,14 +125,13 @@ export default new Vuex.Store({
     },
     getFollower: function(state) {
       axios.request({
-        url: "https://tweeterest.ml/api/followers",
+        url: "http://127.0.0.1:5000/followers",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "X-Api-Key": "NvrMZ9Fj0jRrjYf2As0M7gpnhYC7k4ltci5mZkZGGeY2G"
         },
         params: {
-          follow_id: cookies.get("userId"),
+          follow_id: cookies.get("otherId"),
         }
       }).then((response) => {
         state.commit("updateFollower", response.data),
@@ -142,7 +139,7 @@ export default new Vuex.Store({
       }).catch((error) => {
         console.log(error)
       })
-    }
+    },
   },
   modules: {}
 });

@@ -18,10 +18,10 @@
             </div>
            
             <div id="delete-account">
-                <!-- <button @click="deleteProfile" id="delete-btn">Delete Account</button> -->
+                <button @click="deleteProfile" id="delete-btn">Delete Account</button>
             </div>
             <div id="delete-profile" v-if="display == true">
-                <!-- <delete-profile></delete-profile> -->
+                <delete-profile></delete-profile>
             </div>
             <div id="tweet-icon">
                 <img @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
@@ -39,13 +39,13 @@
 import cookies from 'vue-cookies'
 import ViewAllTweets from '../components/ViewAllTweets.vue'
 import ViewAllUsers from '../components/ViewAllUsers.vue'
-// import DeleteProfile from '../components/DeleteProfile.vue'
+import DeleteProfile from '../components/DeleteProfile.vue'
 
     export default {
         components: {
             ViewAllTweets,
             ViewAllUsers,
-            // DeleteProfile
+            DeleteProfile
         },
         data() {
             return {
@@ -58,9 +58,7 @@ import ViewAllUsers from '../components/ViewAllUsers.vue'
         },
         methods: {
             userProfile: function() {
-                this.$store.dispatch("getTweets"),
-                this.$router.push("/profile"),
-                this.$store.dispatch("getProfile")
+                this.$router.push("/profile")
             },
             checkLogin: function() {
                 if(this.token != undefined) {
@@ -69,6 +67,9 @@ import ViewAllUsers from '../components/ViewAllUsers.vue'
             },
             mounted: function() {
                 this.checkLogin();
+                this.$store.dispatch("getFollowing");
+                this.$store.dispatch("getAllUsers");
+                this.$store.dispatch("getAllTweets");
             },
             userLogout: function() {
                 // cookies.remove("loginToken");
@@ -85,11 +86,11 @@ import ViewAllUsers from '../components/ViewAllUsers.vue'
                 // cookies.remove("userTweetId");
                 this.$router.push("Login");
             },
-            // deleteProfile: function() {
-            //     this.display =! this.display;
-            // },
+            deleteProfile: function() {
+                this.display =! this.display;
+            },
             createTweet: function() {
-                this.$router.push("Tweet");
+                this.$router.push("/tweet");
             },
             refresh: function() {
                 this.$store.dispatch("getAllUsers");

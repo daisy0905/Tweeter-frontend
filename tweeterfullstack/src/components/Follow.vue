@@ -94,7 +94,6 @@ import axios from 'axios'
         border-radius: 1.5em;
         font-weight: bold;
     }
-
     #follow-btn {
         width: 25vw;
         height: 5vh;

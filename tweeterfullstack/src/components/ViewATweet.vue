@@ -15,7 +15,7 @@
                 <img @click="createComment" src="https://www.kindpng.com/picc/m/153-1537658_twitter-comment-icon-png-clipart-png-download-topic.png" alt="tweeter comment icon">
             </div>
             <div id="unit-2">
-                <span id="like-active">{{ tweet.like_amount }}</span>
+                <span id="like-active">{{ likeNum }}</span>
                 <img src="https://www.pngitem.com/pimgs/m/77-770619_leave-a-reply-cancel-reply-twitter-like-icon.png" alt="tweeter like icon" v-if="ifLike" @click="deleteLike">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT-xxei2BZj50qLOyvtuvF7s3RmxqMPoT9wNg&usqp=CAU" alt="tweeter unlike icon" v-else @click="createLike">
             </div>
@@ -26,8 +26,8 @@
             <div></div>
         </div>
         <div id="container-4" v-if="display == true">
-            <!-- <comment class="comments" v-for="comment in comments" :key="comment.id" :comment="comment">
-            </comment> -->
+            <comment class="comments" v-for="comment in comments" :key="comment.id" :comment="comment">
+            </comment>
         </div>
         
     </div>
@@ -36,26 +36,26 @@
 <script>
 import cookies from 'vue-cookies'
 import axios from 'axios'
-// import Comment from "./AComment.vue"
-
+import Comment from "./AComment.vue"
     export default {
         name: "a-tweet",
-        // components: {
-        //     Comment
-        // },
+        components: {
+            Comment,
+        },
         props: {
             tweet: {
                 type: Object,
                 required: true
-            }
+            },
         },
         data() {
             return {
                 token: cookies.get("loginToken"),
-                comments: [],
-                commentNum: "",
-                display: false,
                 ifLike: false,
+                likeNum: "",
+                display: false,
+                comments: [],
+                commentNum: ""
             }
         },
         methods: {
@@ -121,6 +121,7 @@ import axios from 'axios'
                 }
                 }).then((response) => {
                     console.log(response.data);
+                    this.likeNum = response.data.length;
                     for(let i=0; i<response.data.length; i++) {
                     if(response.data[i].username == cookies.get("userName")) {
                     this.ifLike = true;
@@ -146,9 +147,10 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response.data);
                     this.ifLike = true;
+                    this.getLike();
                 }).catch((error) => {
                     console.log(error)
-                })
+                });
             },
             deleteLike: function() {
                 axios.request({
@@ -164,15 +166,16 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response);
                     this.ifLike = false;
-                    // this.likeNum--;
+                    this.getLike();
                 }).catch((error) => {
                     console.log(error)
-                })
+                });
             }  
         },  
         mounted () {
             this.getComments();
             this.getLike();
+            this.$store.dispatch("getAllTweets");
         },
         computed: {
             logUser() {
@@ -309,7 +312,7 @@ import axios from 'axios'
 
 #container-4 {
     width: 100%;
-    height: 5vh;
+    min-height: 30vh;
     display: grid;
     justify-items: center;
     align-items: center; 

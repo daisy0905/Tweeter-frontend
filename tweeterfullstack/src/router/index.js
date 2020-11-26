@@ -4,6 +4,12 @@ import LandingPage from "../views/Landing.vue"
 import SignUpPage from "../views/Signup.vue"
 import LoginPage from "../views/Login.vue"
 import HomePage from "../views/Home.vue"
+import ProfilePage from "../views/Profile.vue"
+import CommentPage from "../views/Comment.vue"
+import TweetPage from "../views/UploadTweet.vue"
+import EditProfilePage from "../views/EditProfile.vue"
+import FollowPage from "../views/Follow.vue"
+
 
 Vue.use(VueRouter);
 
@@ -27,6 +33,31 @@ const routes = [
     path: "/home",
     name: "home-page",
     component: HomePage
+  },
+  {
+    path: "/profile",
+    name: "profile-page",
+    component: ProfilePage
+  },
+  {
+    path: "/comment",
+    name: "comment-page",
+    component: CommentPage
+  },
+  {
+    path: "/tweet",
+    name: "tweet-page",
+    component: TweetPage
+  },
+  {
+    path: "/editprofile",
+    name: "edit-profile-page",
+    component: EditProfilePage
+  },
+  {
+    path: "/follow",
+    name: "follow-page",
+    component: FollowPage
   },
   
 ];

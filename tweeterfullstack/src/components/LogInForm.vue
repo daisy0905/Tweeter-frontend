@@ -44,7 +44,7 @@ import cookies from 'vue-cookies'
                     cookies.set("userImage", response.data.image)
                     this.$store.dispatch("getAllUsers");
                     this.$store.dispatch("getAllTweets");
-                    this.$store.dispatch("getFollowing");
+                    // this.$store.dispatch("getFollowing");
                     this.$router.push("/home");
                 }).catch((error) => {
                     console.log(error);
