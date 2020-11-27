@@ -143,7 +143,7 @@ import axios from 'axios'
             this.getProfile();
             this.getTweets();
             this.$store.dispatch("getFollowing");
-            // this.$store.dispatch("getFollower");
+            this.$store.dispatch("getFollower");
             // this.$store.dispatch("getProfile");
             // this.$store.dispatch("getTweets");
         },
@@ -318,7 +318,7 @@ import axios from 'axios'
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
-    margin-top: 2em;
+    margin-top: 3em;
 
 
     .user-follow {

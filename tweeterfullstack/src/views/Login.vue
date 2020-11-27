@@ -11,6 +11,7 @@
 
 <script>
 import LoginForm from '../components/LogInForm.vue'
+
     export default {
         components: {
             LoginForm
@@ -18,8 +19,8 @@ import LoginForm from '../components/LogInForm.vue'
         methods: {
             signUp: function() {
                 this.$router.push("/signup");
-            }
-        }
+            },
+        },
     }
 </script>
 

@@ -2,8 +2,11 @@
     <div id="home">
         <div v-if="login" class="login">
             <div id="user-header">
-                <img id="user-image" @click="userProfile" :src="UserImage" alt="user image">
-                <h3>Home</h3>
+                <img id="user-image" :src="image" alt="user image">
+                <div>
+                    <h3>{{ username }}</h3>
+                    <h3>Home</h3>
+                </div>
                 <div></div>
                 <button @click="refresh">Refresh</button>
                 <button @click="userLogout" id="logout">Log Out</button>
@@ -53,38 +56,43 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 token: cookies.get("loginToken"),
                 status: "",
                 display: false,
-                userImage: cookies.get("userImage")
+                image: "",
+                username: cookies.get("userName")
             }
         },
         methods: {
-            userProfile: function() {
-                this.$router.push("/profile")
-            },
             checkLogin: function() {
                 if(this.token != undefined) {
                     this.login = true
                 }
             },
+            decodeImage: function() {
+                var encodedUrl = cookies.get('userImage')
+                this.image = decodeURI(encodedUrl)
+                console.log(this.image)
+            },
             mounted: function() {
                 this.checkLogin();
+                this.decodeImage();
                 this.$store.dispatch("getFollowing");
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
             },
             userLogout: function() {
-                // cookies.remove("loginToken");
-                // cookies.remove("userId");
-                // cookies.remove("tweetContent");
-                // cookies.remove("tweetTweetId");
-                // cookies.remove("userCommentId");
-                // cookies.remove("userName");
-                // cookies.remove("otherId");
-                // cookies.remove("tweetUsername");
-                // cookies.remove("tweetTime");
-                // cookies.remove("userPicture");
-                // cookies.remove("userContent");
-                // cookies.remove("userTweetId");
-                this.$router.push("Login");
+                cookies.remove("decoUserImage");
+                cookies.remove("loginToken");
+                cookies.remove("userId");
+                cookies.remove("tweetContent");
+                cookies.remove("tweetTweetId");
+                cookies.remove("userCommentId");
+                cookies.remove("userName");
+                cookies.remove("otherId");
+                cookies.remove("tweetUsername");
+                cookies.remove("tweetTime");
+                cookies.remove("userPicture");
+                cookies.remove("userContent");
+                cookies.remove("userTweetId");
+                this.$router.push("/login");
             },
             deleteProfile: function() {
                 this.display =! this.display;
@@ -93,11 +101,13 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 this.$router.push("/tweet");
             },
             refresh: function() {
+                this.decodeImage();
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
                 this.$store.dispatch("getFollowing");
+                this.$store.dispatch("getFollower");
             }
-        } 
+        }
     }
 </script>
 

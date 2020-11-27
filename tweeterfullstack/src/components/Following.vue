@@ -1,14 +1,18 @@
 <template>
     <div id="following">
-        <div></div>
         <div id="container-1">
+            <img :src="follow.image" alt="users the loged in user follows">
+        </div>
+        <div id="container-2">
             <h3>{{ follow.username }}</h3>
-            <p>{{ follow.bio }}</p>
+            <p>Birthdate: {{ follow.birthdate }}</p>
+            <p>Bio: {{ follow.bio }}</p>
+            <p>Email: {{ follow.email }}</p>
         </div>
         <!-- <div id="container-3">
             <button id="following-btn">Following</button>
         </div> -->
-        <follow :userId="follow.user_id"></follow>
+        <follow :userId="follow.user_id" id="container-2"></follow>
     </div>
 </template>
 
@@ -43,11 +47,26 @@ import Follow from './Follow.vue'
     display: grid;
     justify-items: center;
     align-items: center; 
-    grid-template-columns: 10% 60% 30%;
+    grid-template-columns: 20% 60% 20%;
     border-bottom: 1px solid #E1E8ED;
 }
 
 #container-1 {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center; 
+
+    img {
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+#container-2 {
     height: 100%;
     width: 100%;
     display: grid;
@@ -58,33 +77,42 @@ import Follow from './Follow.vue'
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
+        text-align: center;
         }
 
     p {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem;
-        text-align: left;
+        text-align: center;
     }
 }
 
-#container-3 {
+// #container-3 {
+//     height: 100%;
+//     width: 100%;
+//     display: grid;
+//     justify-items: center;
+//     align-items: center;
+
+//     #following-btn {
+//         width: 25vw;
+//         height: 5vh;
+//         background-color: #1DA1F2;
+//         color: white;
+//         font-family: Arial, Helvetica, sans-serif;
+//         font-size: 0.8rem;
+//         border-radius: 1.5em;
+//         font-weight: bold;
+//         border: none;
+//     }
+// }
+
+#container-2 {
     height: 100%;
     width: 100%;
     display: grid;
     justify-items: center;
     align-items: center;
-
-    #following-btn {
-        width: 25vw;
-        height: 5vh;
-        background-color: #1DA1F2;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        border-radius: 1.5em;
-        font-weight: bold;
-        border: none;
-    }
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div id="user">
         <div id="container-1">
-            <img @click="viewOtherUser" :src="user.image" alt="user image">
+            <img @click="viewUser" :src="user.image" alt="user image">
         </div>
         <div id="container-2">
             <h3>{{ user.username }}</h3>
@@ -27,7 +27,7 @@ import cookies from 'vue-cookies'
             } 
         },
         methods: {
-            viewOtherUser: function() {
+            viewUser: function() {
                 cookies.set("otherId", this.user.id),
                 this.$router.push("/profile")
             }

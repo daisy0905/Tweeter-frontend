@@ -1,7 +1,7 @@
 <template>
     <div id="follower">
-        <div id="container-1">
-            <img src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" alt="user image">
+       <div id="container-1">
+            <img :src="follower.image" alt="users the loged in user follows">
         </div>
         <div id="container-2">
             <h3>{{ follower.username }}</h3>
@@ -52,7 +52,8 @@
     align-items: center; 
 
     img {
-        width: 40%;
+        height: 50px;
+        width: 50px;
         object-fit: cover;
         border-radius: 50%;
     }

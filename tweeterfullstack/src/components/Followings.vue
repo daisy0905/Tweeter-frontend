@@ -25,6 +25,6 @@ import Following from './Following'
 <style lang="scss" scoped>
 .followings {
     min-height: 15vh;
-    width: 90%;
+    width: 100%;
 }
 </style>
