@@ -12,7 +12,7 @@
         <!-- <div id="container-3">
             <button id="following-btn">Following</button>
         </div> -->
-        <follow :userId="follow.user_id" id="container-2"></follow>
+        <follow :userId="follow.follow_id" id="container-3"></follow>
     </div>
 </template>
 
@@ -28,6 +28,9 @@ import Follow from './Follow.vue'
             follow: {
                 type: Object,
                 required: true
+            },
+            userId: {
+                type: Number
             } 
         }
     }
@@ -47,15 +50,16 @@ import Follow from './Follow.vue'
     display: grid;
     justify-items: center;
     align-items: center; 
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 20% 50% 30%;
     border-bottom: 1px solid #E1E8ED;
+    margin: 0 0 1em 0;
 }
 
 #container-1 {
     height: 100%;
     width: 100%;
     display: grid;
-    justify-items: center;
+    justify-items: left;
     align-items: center; 
 
     img {
@@ -77,13 +81,13 @@ import Follow from './Follow.vue'
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
-        text-align: center;
+        text-align: left;
         }
 
     p {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem;
-        text-align: center;
+        text-align: left;
     }
 }
 
@@ -107,7 +111,7 @@ import Follow from './Follow.vue'
 //     }
 // }
 
-#container-2 {
+#container-3 {
     height: 100%;
     width: 100%;
     display: grid;

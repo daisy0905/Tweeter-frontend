@@ -1,7 +1,7 @@
 <template>
     <div>
         <button v-if="userFollow == true" @click="followChoice" id="follow-btn">Following</button>
-        <button v-if="userFollow == false" @click="followChoice" id="following-btn">Follow</button>
+        <button v-else @click="followChoice" id="following-btn">Follow</button>
     </div>
 </template>
 
@@ -24,6 +24,8 @@ import axios from 'axios'
         },
         methods: {
             followCheck: function() {
+                console.log(this.userId);
+                console.log(this.$store.state.follows)
                 for(let i=0; i<this.$store.state.follows.length; i++) {
                     if(this.userId == this.$store.state.follows[i].follow_id) {
                         this.userFollow = true;
