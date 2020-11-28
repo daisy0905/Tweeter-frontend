@@ -21,6 +21,9 @@ import LoginForm from '../components/LogInForm.vue'
                 this.$router.push("/signup");
             },
         },
+        mounted () {
+            this.$store.dispatch("getFollowing");
+        },
     }
 </script>
 

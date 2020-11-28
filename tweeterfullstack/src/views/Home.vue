@@ -74,9 +74,9 @@ import DeleteProfile from '../components/DeleteProfile.vue'
             mounted: function() {
                 this.checkLogin();
                 this.decodeImage();
-                this.$store.dispatch("getFollowing");
-                this.$store.dispatch("getAllUsers");
-                this.$store.dispatch("getAllTweets");
+                // this.$store.dispatch("getFollowing");
+                // this.$store.dispatch("getAllUsers");
+                // this.$store.dispatch("getAllTweets");
             },
             userLogout: function() {
                 cookies.remove("decoUserImage");

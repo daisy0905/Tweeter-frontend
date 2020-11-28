@@ -24,7 +24,6 @@ import axios from 'axios'
         },
         methods: {
             followCheck: function() {
-                console.log(this.userId);
                 console.log(this.$store.state.follows)
                 for(let i=0; i<this.$store.state.follows.length; i++) {
                     if(this.userId == this.$store.state.follows[i].follow_id) {
@@ -79,6 +78,7 @@ import axios from 'axios'
            }
         },
         mounted () {
+            this.$store.dispatch("getFollowing");
             this.followCheck();
         }
     }

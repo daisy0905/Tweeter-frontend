@@ -78,8 +78,8 @@ import axios from 'axios'
                 this.$router.push("/editprofile");
             },
             viewTweets: function() {
-                this.getOtherUserProfile();
-                this.getOtherUserTweets();
+                this.getProfile();
+                this.getTweets();
             },
             getProfile: function() {
                 axios.request({
