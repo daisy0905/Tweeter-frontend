@@ -1,34 +1,34 @@
 <template>
-    <div id="comments">
-        <div id="container-1">
+    <div class="comments">
+        <div class="container-1">
             <h3>{{ comment.username }}</h3>
             <h4>{{ comment.created_at }}</h4>
         </div>
-        <div id="container-2">
+        <div class="container-2">
             <p>{{ comment.content }}</p>
         </div>
-        <div id="container-3">
+        <div class="container-3">
             <div></div>
-            <div id="unit-1">
+            <div class="unit-1">
                 <h5 @click="viewNestedComments">{{ nested_commentNum }}</h5>
                 <img @click="goToNestedComments" src="https://www.kindpng.com/picc/m/153-1537658_twitter-comment-icon-png-clipart-png-download-topic.png" alt=" nested comment icon">
             </div>
             <div class="unit-2">
-                <span id="like-active">{{ commentLikeNum }}</span>
-                <!-- <img class="photo" src="../assets/like-icon.png" alt="tweeter like icon" @click="deleteLike">
-                <img src="../assets/unlike-icon.png" alt="tweeter unlike icon" @click="createLike"> -->
+                <span class="like-active">{{ commentLikeNum }}</span>
+                <img src="../assets/like-icon.png" alt="tweeter like icon" v-if="ifLike" @click="deleteLike">
+                <img src="../assets/unlike-icon.png" alt="tweeter unlike icon" v-else @click="createLike">
             </div>
-            <div id="unit-3">
+            <div class="unit-3">
                 <img v-if="comment.username == logUser" class="comment-btn" @click="goToComment" src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt="update icon">
                 <img v-if="comment.username == logUser" class="comment-btn" @click="deleteComment" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST1mtZCRWh6vOvjwovfizM2BvKFMTiCDawFw&usqp=CAU" alt="delete icon">
             </div>
             <div></div>
         </div>
-        <div id="container-4" v-if="display == true">
+        <div class="container-4" v-if="display == true">
             <nested-comment class="nested_comments" v-for="nested_comment in nested_comments" :key="nested_comment.id" :nested_comment="nested_comment"></nested-comment>
         </div>
-        <div id="container-5" v-if="show == true">
-            <textarea id="nested_comment_input" name="comment-area" v-model="nested_content"></textarea>
+        <div class="container-5" v-if="show == true">
+            <textarea class="nested_comment_input" name="comment-area" v-model="nested_content"></textarea>
             <button @click="createNestedComment">Create</button>
             <p>{{ status }}</p>
         </div>
@@ -90,6 +90,7 @@ import NestedComment from './NestedComment.vue'
                     }
                 }).then((response) => {
                     console.log(response);
+                    location.reload();
                 }).catch((error) => {
                     console.log(error);
                 }) 
@@ -219,7 +220,7 @@ import NestedComment from './NestedComment.vue'
     box-sizing: border-box;
 }
 
-#comments {
+.comments {
     min-height: 5vh;
     width: 90%;
     display: grid;
@@ -232,7 +233,7 @@ import NestedComment from './NestedComment.vue'
     margin: 0.5em 0 0 0;
 }
 
-#container-1 {
+.container-1 {
     width: 100%;
     height: 5vh;
     grid-template-columns: 30% 50% 20%;
@@ -255,7 +256,7 @@ import NestedComment from './NestedComment.vue'
     }
 }
 
-#container-2 {
+.container-2 {
     width: 100%;
     min-height: 5vh;
     display: grid;
@@ -271,7 +272,7 @@ import NestedComment from './NestedComment.vue'
     }
 }
 
-#container-3 {
+.container-3 {
     width: 90%;
     height: 5vh;
     display: grid;
@@ -283,7 +284,7 @@ import NestedComment from './NestedComment.vue'
     grid-template-columns: 5% repeat(4, 1fr) 5%;
     
 
-    #unit-1 {
+    .unit-1 {
         height: 100%;
         width: 100%;
         display: grid;
@@ -303,7 +304,7 @@ import NestedComment from './NestedComment.vue'
         }
     }
     
-    #unit-2 {
+    .unit-2 {
         width: 100%;
         height: 100%;
         display: grid;
@@ -311,19 +312,19 @@ import NestedComment from './NestedComment.vue'
         align-items: center;
         grid-template-columns: 1fr 1.5fr;
 
-        #like-active {
+        .like-active {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
             color: #AAB8C2;
             font-weight: bold;
         }
         
-        .photo {
+        img {
             width: 20px;
         }
     }
 
-    #unit-3 {
+    .unit-3 {
     width: 100%;
     height: 5vh;
     display: grid;
@@ -342,7 +343,7 @@ import NestedComment from './NestedComment.vue'
     }   
 }
 
-#container-4 {
+.container-4 {
     width: 100%;
     min-height: 30vh;
     display: grid;
@@ -350,7 +351,7 @@ import NestedComment from './NestedComment.vue'
     align-items: center; 
 }
 
-#container-5 {
+.container-5 {
     width: 100%;
     min-height: 5vh;
     display: grid;
@@ -358,7 +359,7 @@ import NestedComment from './NestedComment.vue'
     align-items: center; 
     margin-top: 0.5em;
 
-    #nested_comment_input {
+    .nested_comment_input {
         width: 90%;
         min-height: 10vh;
         font-family: Arial, Helvetica, sans-serif;

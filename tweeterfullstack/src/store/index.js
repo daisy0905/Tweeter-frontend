@@ -12,16 +12,11 @@ export default new Vuex.Store({
     id: cookies.get("UserId"),
     token: cookies.get("loginToken"),
     status: "",
-    user: [],
     follows: [],
     followers: [],
     users: []
   },
   mutations: {
-    updateProfile: function(state, data) {
-      state.user = data;
-      state.status = "Success";
-    },
     updateTweets: function(state, data) {
       state.tweets = data;
     },
@@ -39,25 +34,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getProfile: function(state) {
-      console.log(cookies.get("userId"));
-      axios.request({
-        url: "http://127.0.0.1:5000/users",
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        params: {
-            id: cookies.get("userId")
-        }
-    }).then((response) => {
-        this.commit("updateProfile", response.data[0])
-    }).catch((error) => {
-        console.log(error);
-        state.status = "Error";
-    })
-    },
-
     getTweets: function(context) {
       axios.request({
         url: "http://127.0.0.1:5000/tweets",
@@ -114,7 +90,7 @@ export default new Vuex.Store({
           "Content-Type": "application/json",
         },
         params: {
-          user_id: cookies.get("otherId"),
+          user_id: cookies.get("userId"),
         }
       }).then((response) => {
         state.commit("updateFollow", response.data),

@@ -27,6 +27,7 @@
 <script>
 import Followings from '../components/Followings.vue'
 import Followers from '../components/Followers.vue'
+import cookies from 'vue-cookies'
 
     export default {
         components: {
@@ -35,7 +36,8 @@ import Followers from '../components/Followers.vue'
         },
         data() {
             return {
-                follow: true
+                follow: true,
+                name: cookies.get("name")
             }
         },
         methods: {
@@ -50,9 +52,6 @@ import Followers from '../components/Followers.vue'
             }
         },
         computed: {
-            name: function() {
-                return this.$store.state.user.username;
-            },
             followingNum: function() {
                 return this.$store.state.follows.length;
             },

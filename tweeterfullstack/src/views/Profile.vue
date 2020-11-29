@@ -16,7 +16,7 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div id="profile-btn">
-                    <button v-if="userName == logUser" @click="viewProfile">Edit Profile</button>
+                    <button v-if="name == logUser" @click="viewProfile">Edit Profile</button>
                 </div>
             </div>
             <div id="container-4">
@@ -44,7 +44,7 @@
         </div>
         <view-a-tweet class="tweets" v-for="tweet in othertweets" :key="tweet.id" :tweet="tweet"></view-a-tweet>
         <div id="tweet-icon">
-            <img v-if="userName == logUser" @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
+            <img v-if="name== logUser" @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
         </div>
     </div>
 </template>
@@ -60,17 +60,17 @@ import axios from 'axios'
         },
         data() {
             return {
-                name: "",
-                bio: "",
-                birthdate: "",
-                created_at: "",
+                name: cookies.get("name"),
+                bio: cookies.get("bio"),
+                birthdate: cookies.get("birthdate"),
+                created_at: cookies.get("created_at"),
+                image: cookies.get("image"),
                 othertweets: [],
-                userName: cookies.get("Name")
+                logUser: cookies.get("userName"),
             }
         },
         methods: {
             refresh: function() {
-                this.getProfile();
                 this.getTweets();
             },
             viewProfile: function() {
@@ -78,30 +78,7 @@ import axios from 'axios'
                 this.$router.push("/editprofile");
             },
             viewTweets: function() {
-                this.getProfile();
                 this.getTweets();
-            },
-            getProfile: function() {
-                axios.request({
-                url: "http://127.0.0.1:5000/users",
-                   method: "GET",
-                   headers: {
-                    "Content-Type": "application/json",
-                   },
-                   params: {
-                       id: cookies.get("otherId")
-                   }
-                }).then((response) => {
-                    console.log(response);
-                    this.name = response.data[0].username;
-                    this.bio = response.data[0].bio;
-                    this.birthdate = response.data[0].birthdate;
-                    this.created_at = response.data[0].created_at;
-                    this.image = response.data[0].image;
-                    cookies.set("Name", response.data[0].username)
-                }).catch((error) => {
-                    console.log(error);
-                })
             },
             getTweets: function() {
                 axios.request({
@@ -123,11 +100,11 @@ import axios from 'axios'
             },
             getFollowing: function() {
                 this.$store.dispatch("getFollowing");
-                this.$router.push("Follow");
+                this.$router.push("/follow");
             },
             getFollower: function() {
                 this.$store.dispatch("getFollower");
-                this.$router.push("Follow");
+                this.$router.push("/follow");
             },
             goToHome: function() {
                 this.$store.dispatch("getAllUsers");
@@ -140,12 +117,9 @@ import axios from 'axios'
             },
         },
         mounted () {
-            this.getProfile();
             this.getTweets();
             this.$store.dispatch("getFollowing");
             this.$store.dispatch("getFollower");
-            // this.$store.dispatch("getProfile");
-            // this.$store.dispatch("getTweets");
         },
         computed: {
             followingNum: function() {
@@ -153,9 +127,6 @@ import axios from 'axios'
             },
             followerNum: function() {
                 return this.$store.state.followers.length;
-            },
-            logUser() {
-                return cookies.get('userName') 
             }
         }
     }

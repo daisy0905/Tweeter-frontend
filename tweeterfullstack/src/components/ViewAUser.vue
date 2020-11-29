@@ -1,7 +1,7 @@
 <template>
     <div id="user">
         <div id="container-1">
-            <img @click="viewUser" :src="user.image" alt="user image">
+            <img @click="getProfile" :src="user.image" alt="user image">
         </div>
         <div id="container-2">
             <h3>{{ user.username }}</h3>
@@ -14,6 +14,7 @@
 <script>
 import Follow from './Follow.vue'
 import cookies from 'vue-cookies'
+import axios from 'axios'
 
     export default {
         name: "view-a-user",
@@ -27,10 +28,29 @@ import cookies from 'vue-cookies'
             } 
         },
         methods: {
-            viewUser: function() {
-                cookies.set("otherId", this.user.id),
-                this.$router.push("/profile")
-            }
+            getProfile: function() {
+                axios.request({
+                url: "http://127.0.0.1:5000/users",
+                   method: "GET",
+                   headers: {
+                    "Content-Type": "application/json",
+                   },
+                   params: {
+                       id: this.user.id
+                   }
+                }).then((response) => {
+                    console.log(response);
+                    cookies.set("name", response.data[0].username)
+                    cookies.set("bio", response.data[0].bio)
+                    cookies.set("birthdate", response.data[0].birthdate)
+                    cookies.set("created_at", response.data[0].created_at)
+                    cookies.set("image", response.data[0].image)
+                    cookies.set("otherId", response.data[0].id)
+                    this.$router.push("/profile")
+                }).catch((error) => {
+                    console.log(error);
+                })
+            },
         },
         computed: {
             users: function() {
