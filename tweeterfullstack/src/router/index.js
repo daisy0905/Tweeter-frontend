@@ -9,6 +9,8 @@ import CommentPage from "../views/Comment.vue"
 import TweetPage from "../views/UploadTweet.vue"
 import EditProfilePage from "../views/EditProfile.vue"
 import FollowPage from "../views/Follow.vue"
+import UserIntroPage from "../views/UserIntro.vue"
+import UserFollowPage from "../views/UserFollow.vue"
 
 
 Vue.use(VueRouter);
@@ -58,6 +60,16 @@ const routes = [
     path: "/follow",
     name: "follow-page",
     component: FollowPage
+  },
+  {
+    path: "/userintro",
+    name: "userintro-page",
+    component: UserIntroPage
+  },
+  {
+    path: "/userfollow",
+    name: "userfollow-page",
+    component: UserFollowPage
   },
   
 ];

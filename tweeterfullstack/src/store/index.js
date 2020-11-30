@@ -13,10 +13,18 @@ export default new Vuex.Store({
     token: cookies.get("loginToken"),
     status: "",
     follows: [],
+    userFollows: [],
     followers: [],
-    users: []
+    userFollowers: [],
+    users: [],
+    user: [],
+    retweets: []
   },
   mutations: {
+    updateProfile: function(state, data) {
+      state.user = data;
+      state.status = "Success";
+    },
     updateTweets: function(state, data) {
       state.tweets = data;
     },
@@ -26,14 +34,43 @@ export default new Vuex.Store({
     updateFollow: function(state, data) {
       state.follows = data;
     },
+    updateUserFollow: function(state, data) {
+      state.userFollows = data;
+    },
     updateFollower: function(state, data) {
       state.followers = data;
+    },
+    updateUserFollower: function(state, data) {
+      state.userFollowers = data;
     },
     updateUser: function(state, data) {
       state.users = data;
     },
+    updateAllRetweets: function(state, data) {
+      state.retweets = data;
+    },
   },
   actions: {
+    getProfile: function(state) {
+      console.log(cookies.get("userId"));
+      axios.request({
+        url: "http://127.0.0.1:5000/users",
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        params: {
+            userId: cookies.get("userId"),
+            loginToken: state.token
+        }
+    }).then((response) => {
+        this.commit("updateProfile", response.data[0])
+    }).catch((error) => {
+        console.log(error);
+        state.status = "Error";
+    })
+    },
+
     getTweets: function(context) {
       axios.request({
         url: "http://127.0.0.1:5000/tweets",
@@ -82,7 +119,7 @@ export default new Vuex.Store({
         state.status = "Error";
     })
     },
-    getFollowing: function(state) {
+    getUserFollowing: function(state) {
       axios.request({
         url: "http://127.0.0.1:5000/follows",
         method: "GET",
@@ -91,6 +128,23 @@ export default new Vuex.Store({
         },
         params: {
           user_id: cookies.get("userId"),
+        }
+      }).then((response) => {
+        state.commit("updateUserFollow", response.data),
+        console.log(response.data)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    getFollowing: function(state) {
+      axios.request({
+        url: "http://127.0.0.1:5000/follows",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params: {
+          user_id: cookies.get("otherId"),
         }
       }).then((response) => {
         state.commit("updateFollow", response.data),
@@ -111,6 +165,37 @@ export default new Vuex.Store({
         }
       }).then((response) => {
         state.commit("updateFollower", response.data),
+        console.log(response.data)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    getUserFollower: function(state) {
+      axios.request({
+        url: "http://127.0.0.1:5000/followers",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params: {
+          follow_id: cookies.get("userId"),
+        }
+      }).then((response) => {
+        state.commit("updateUserFollower", response.data),
+        console.log(response.data)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    getAllRetweets: function(context) {
+      axios.request({
+        url: "http://127.0.0.1:5000/retweets",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+         }
+      }).then((response) => {
+        context.commit("updateAllRetweets", response.data),
         console.log(response.data)
       }).catch((error) => {
         console.log(error)

@@ -37,6 +37,12 @@ import cookies from 'vue-cookies'
     export default {
         data() {
             return {
+                email: cookies.get("userEmail"),
+                username: cookies.get("userName"),
+                bio: cookies.get("userBio"),
+                birthdate: cookies.get("userBirthdate"),
+                password: "",
+                image: cookies.get("userImage"),
                 emailInput: this.email,
                 usernameInput: this.username,
                 bioInput: this.bio,
@@ -45,28 +51,7 @@ import cookies from 'vue-cookies'
                 imageInput: this.image,
                 token: cookies.get("loginToken"),
                 loginStatus: "",
-                UserPhoto: cookies.get("userImage")
-            }
-        },
-
-        computed: {
-            email: function() {
-                return this.$store.state.user.email
-            },
-            username: function() {
-                return this.$store.state.user.username
-            },
-            bio: function() {
-                return this.$store.state.user.bio
-            },
-            birthdate: function() {
-                return this.$store.state.user.birthdate
-            },
-            password: function() {
-                return this.$store.state.user.password
-            },
-            image: function() {
-                return this.$store.state.user.image
+                UserPhoto: cookies.get("userImage"), 
             }
         },
 
@@ -96,8 +81,8 @@ import cookies from 'vue-cookies'
                 })
             },
             backToProfile: function() {
-                this.$router.push("Profile");
-                this.$store.dispatch("getProfile");
+                this.$store.dispatch("getProfile")
+                this.$router.push("/userintro")
             }
         },
     }

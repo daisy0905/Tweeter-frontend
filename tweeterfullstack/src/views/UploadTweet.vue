@@ -39,7 +39,7 @@ import axios from 'axios'
                 this.$router.push("/home");
             },
             goToProfile: function() {
-                this.$router.push("/profile");
+                this.$router.push("/userintro");
             },
             createTweet: function() {
                 this.tweetStatus = "Tweeting!"

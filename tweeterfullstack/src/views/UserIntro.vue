@@ -16,7 +16,7 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div id="profile-btn">
-                    <button v-if="name == logUser" @click="viewProfile">Edit Profile</button>
+                    <button @click="viewProfile">Edit Profile</button>
                 </div>
             </div>
             <div id="container-4">
@@ -41,10 +41,11 @@
             <div id="container-6">
                 <button class="tweet-btn" @click="viewTweets">Tweets</button>
             </div>
+            <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet"></a-retweet>
+            <view-a-tweet class="tweets" v-for="tweet in tweets" :key="tweet.id" :tweet="tweet" :retweet="retweet"></view-a-tweet>
         </div>
-        <view-a-tweet class="tweets" v-for="tweet in othertweets" :key="tweet.id" :tweet="tweet"></view-a-tweet>
         <div id="tweet-icon">
-            <img v-if="name== logUser" @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
+            <img @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
         </div>
     </div>
 </template>
@@ -52,33 +53,40 @@
 <script>
 import cookies from 'vue-cookies'
 import ViewATweet from '../components/ViewATweet.vue'
+import ARetweet from '../components/ARetweet.vue'
 import axios from 'axios'
 
     export default {
         components: {
-            ViewATweet
+            ViewATweet,
+            ARetweet
+        },
+        props: {
+            retweet: {
+                type: Object,
+                required: true
+            }
         },
         data() {
             return {
-                name: cookies.get("name"),
-                bio: cookies.get("bio"),
-                birthdate: cookies.get("birthdate"),
-                created_at: cookies.get("created_at"),
-                image: cookies.get("image"),
-                othertweets: [],
-                logUser: cookies.get("userName"),
+                tweets: [],
+                retweets: []
             }
         },
         methods: {
             refresh: function() {
                 this.getTweets();
+                this.getRetweets();
+                this.$store.dispatch("getProfile")
             },
             viewProfile: function() {
-                this.$store.dispatch("getProfile");
                 this.$router.push("/editprofile");
             },
             viewTweets: function() {
                 this.getTweets();
+            },
+            viewRetweets: function() {
+                this.getRetweets();
             },
             getTweets: function() {
                 axios.request({
@@ -88,29 +96,45 @@ import axios from 'axios'
                     "Content-Type": "application/json",
                    },
                    params: {
-                       id: cookies.get("otherId")
+                       id: cookies.get("userId")
                    }
                 }).then((response) => {
                     console.log(response);
-                    this.othertweets = response.data;
-                    console.log(this.othertweets);
+                    this.tweets = response.data;
+                    console.log(this.tweets);
                 }).catch((error) => {
                     console.log(error);
                 }) 
             },
+            getRetweets: function() {
+                axios.request({
+                url: "http://127.0.0.1:5000/retweets",
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                params: {
+                    user_id: cookies.get("userId"),
+                }
+                }).then((response) => {
+                    console.log(response.data);
+                    this.retweets = response.data;
+                }).catch((error) => {
+                    console.log(error)
+                })
+            },
             getFollowing: function() {
-                this.$store.dispatch("getFollowing");
-                this.$router.push("/follow");
+                this.$store.dispatch("getUserFollowing");
+                this.$router.push("/userfollow");
             },
             getFollower: function() {
-                this.$store.dispatch("getFollower");
-                this.$router.push("/follow");
+                this.$store.dispatch("getUserFollower");
+                this.$router.push("/userfollow");
             },
             goToHome: function() {
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
-                // this.$store.dispatch("getUserFollowing");
-                this.$router.push("Home")
+                this.$router.push("/home")
             },
             createTweet: function() {
                 this.$router.push("/tweet");
@@ -118,16 +142,35 @@ import axios from 'axios'
         },
         mounted () {
             this.getTweets();
-            this.$store.dispatch("getFollowing");
-            this.$store.dispatch("getFollower");
+            this.$store.dispatch("getUserFollowing");
+            this.$store.dispatch("getUserFollower");
+            this.$store.dispatch("getProfile")
         },
         computed: {
             followingNum: function() {
-                return this.$store.state.follows.length;
+                return this.$store.state.userFollows.length;
             },
             followerNum: function() {
-                return this.$store.state.followers.length;
-            }
+                return this.$store.state.userFollowers.length;
+            },
+            email: function() {
+                return this.$store.state.user.email
+            },
+            name: function() {
+                return this.$store.state.user.username
+            },
+            bio: function() {
+                return this.$store.state.user.bio
+            },
+            birthdate: function() {
+                return this.$store.state.user.birthdate
+            },
+            image: function() {
+                return this.$store.state.user.image
+            },
+            created_at: function() {
+                return this.$store.state.user.created_at
+            },
         }
     }
 </script>

@@ -46,6 +46,7 @@ import axios from 'axios'
                     cookies.set("created_at", response.data[0].created_at)
                     cookies.set("image", response.data[0].image)
                     cookies.set("otherId", response.data[0].id)
+                    this.$store.dispatch("getFollowing");
                     this.$router.push("/profile")
                 }).catch((error) => {
                     console.log(error);

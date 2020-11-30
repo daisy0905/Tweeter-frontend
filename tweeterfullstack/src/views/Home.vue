@@ -2,7 +2,7 @@
     <div id="home">
         <div v-if="login" class="login">
             <div id="user-header">
-                <img id="user-image" :src="image" alt="user image">
+                <img @click="viewUserProfile" id="user-image" :src="image" alt="user image">
                 <div>
                     <h3>{{ username }}</h3>
                     <h3>Home</h3>
@@ -74,9 +74,13 @@ import DeleteProfile from '../components/DeleteProfile.vue'
             mounted: function() {
                 this.checkLogin();
                 this.decodeImage();
-                // this.$store.dispatch("getFollowing");
-                // this.$store.dispatch("getAllUsers");
-                // this.$store.dispatch("getAllTweets");
+                this.$store.dispatch("getUserFollowing");
+                this.$store.dispatch("getAllUsers");
+                this.$store.dispatch("getAllTweets");
+                this.$store.dispatch("getAllRetweets");
+            },
+            viewUserProfile: function() {
+                this.$router.push("/userintro");
             },
             userLogout: function() {
                 cookies.remove("decoUserImage");
@@ -104,8 +108,9 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 this.decodeImage();
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
-                this.$store.dispatch("getFollowing");
-                this.$store.dispatch("getFollower");
+                this.$store.dispatch("getUserFollowing");
+                this.$store.dispatch("getUserFollower");
+                this.$store.dispatch("getAllRetweets");
             }
         }
     }

@@ -9,24 +9,17 @@
             <p>Bio: {{ follow.bio }}</p>
             <p>Email: {{ follow.email }}</p>
         </div>
-        <follow v-if="name== logUser" :userId="follow.follow_id" id="container-3"></follow>
+        <follow :userId="follow.follow_id" id="container-3"></follow>
     </div>
 </template>
 
 <script>
 import Follow from './Follow.vue'
-import cookies from 'vue-cookies'
 
     export default {
-        name: "following",
+        name: "userfollowing",
         components: {
             Follow,
-        },
-        data() {
-            return {
-                name: cookies.get("name"),
-                logUser: cookies.get("userName")
-            }
         },
         props: {
             follow: {

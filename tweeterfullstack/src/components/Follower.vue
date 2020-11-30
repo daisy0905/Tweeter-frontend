@@ -7,9 +7,7 @@
             <h3>{{ follower.username }}</h3>
             <p>{{ follower.bio }}</p>
         </div>
-        <div id="container-3">
-            <button id="following-btn">Follower</button>
-        </div>
+        <div></div>
     </div>
 </template>
 
@@ -40,7 +38,7 @@
     display: grid;
     justify-items: center;
     align-items: center; 
-    grid-template-columns: 20% 50% 30%;
+    grid-template-columns: 20% 70% 10%;
     border-bottom: 1px solid #E1E8ED;
 }
 
@@ -76,26 +74,6 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem;
         text-align: left;
-    }
-}
-
-#container-3 {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-
-    #following-btn {
-        width: 25vw;
-        height: 5vh;
-        background-color: #1DA1F2;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        border-radius: 1.5em;
-        font-weight: bold;
-        border: none;
     }
 }
 

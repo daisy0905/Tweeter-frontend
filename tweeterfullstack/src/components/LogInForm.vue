@@ -41,20 +41,24 @@ import cookies from 'vue-cookies'
                     cookies.set("loginToken", response.data.loginToken);
                     cookies.set("userId", response.data.id);
                     cookies.set("userName", response.data.username);
-                    cookies.set("userImage", response.data.image)
+                    cookies.set("userImage", response.data.image);
+                    cookies.set("userBio", response.data.bio);
+                    cookies.set("userCreation", response.data.created_at);
+                    cookies.set("userBirthdate", response.data.birthdate);
+                    cookies.set("userEmail", response.data.email);
                     this.$store.dispatch("getAllUsers");
                     this.$store.dispatch("getAllTweets");
-                    this.$store.dispatch("getFollowing");
-                    if(this.$store.state.follows.length != "null") {
-                        this.loginStatus = "Success!"
-                        this.$router.push("/home")
-                    }
-                    // setTimeout(()=>{this.$router.push("/home")}, 4000);
+                    this.$store.dispatch("getUserFollowing");
+                    // if(this.$store.state.follows.length != "null") {
+                    //     this.loginStatus = "Success!"
+                    //     this.$router.push("/home")
+                    // }
+                    setTimeout(()=>{this.$router.push("/home")}, 4000);
                 }).catch((error) => {
                     console.log(error);
                     this.loginStatus = "Error";
                 }) 
-            }
+            },
         }
     }
 </script>

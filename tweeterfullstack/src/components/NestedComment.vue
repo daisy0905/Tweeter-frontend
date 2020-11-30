@@ -1,19 +1,19 @@
 <template>
-    <div id="nested_comments">
-        <div id="container-1">
+    <div class="nested_comments">
+        <div class="container-1">
             <h3>{{ nested_comment.username }}</h3>
             <h4>{{ nested_comment.created_at }}</h4>
         </div>
-        <div id="container-2">
+        <div class="container-2">
             <p>{{ nested_comment.content }}</p>
-            <div id="unit" v-if="nested_comment.username == logUser">
+            <div class="unit" v-if="nested_comment.username == logUser">
                 <img @click="goToComment" src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt="update icon">
                 <img @click="deleteNestedComment" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST1mtZCRWh6vOvjwovfizM2BvKFMTiCDawFw&usqp=CAU" alt="delete icon">
             </div>
         </div>
-        <div id="container-3" v-if="display == true">
-            <textarea id="nested_comment_input" name="comment-area" v-model="nested_content"></textarea>
-            <button id="update-btn" @click="updateNestedComment">Update</button>
+        <div class="container-3" v-if="display == true">
+            <textarea class="nested_comment_input" name="comment-area" v-model="nested_content"></textarea>
+            <button class="update-btn" @click="updateNestedComment">Update</button>
             <p>{{ status }}</p>
         </div>
     </div>
@@ -99,7 +99,7 @@ import axios from 'axios'
     box-sizing: border-box;
 }
 
-#nested_comments {
+.nested_comments {
     min-height: 10vh;
     width: 90%;
     display: grid;
@@ -112,7 +112,7 @@ import axios from 'axios'
     margin: 0.5em 0 0 0;
 }
 
-#container-1 {
+.container-1 {
     width: 90%;
     height: 5vh;
     grid-template-columns: 40% 60%;
@@ -134,7 +134,7 @@ import axios from 'axios'
     }
 }
 
-#container-2 {
+.container-2 {
     width: 100%;
     height: 5vh;
     display: grid;
@@ -150,7 +150,7 @@ import axios from 'axios'
     text-align: center;
     }
 
-    #unit {
+    .unit {
         width: 100%;
         height: 100%;
         display: grid;
@@ -165,7 +165,7 @@ import axios from 'axios'
 
 }
 
-#container-3 {
+.container-3 {
     width: 100%;
     min-height: 5vh;
     display: grid;
@@ -173,7 +173,7 @@ import axios from 'axios'
     align-items: center; 
     margin-top: 0.5em;
 
-    #nested_comment_input {
+    .nested_comment_input {
         width: 90%;
         min-height: 10vh;
         font-family: Arial, Helvetica, sans-serif;
@@ -181,7 +181,7 @@ import axios from 'axios'
         background-color: white;
     }
 
-    #update-btn {
+    .update-btn {
         width: 30%;
         height: 4vh;
         font-family: Arial, Helvetica, sans-serif;

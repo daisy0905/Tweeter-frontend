@@ -1,31 +1,36 @@
 <template>
-    <div id="tweet-unit">
-        <div id="container-1">
+    <div class="tweet-unit">
+        <div class="container-1">
             <h3>{{ tweet.username }}</h3>
             <h4>{{ tweet.created_at }}</h4>
             <div></div>
         </div>
-        <div id="container-2">
+        <div class="container-2">
             <p>{{ tweet.content }}</p>
         </div>
-        <div id="container-3">
+        <div class="container-3">
             <div></div>
-            <div id="unit-1">
+            <div class="unit-1">
                 <h5 @click="viewComments">{{ commentNum }}</h5>
                 <img @click="createComment" src="https://www.kindpng.com/picc/m/153-1537658_twitter-comment-icon-png-clipart-png-download-topic.png" alt="tweeter comment icon">
             </div>
-            <div id="unit-2">
-                <span id="like-active">{{ likeNum }}</span>
+            <div class="unit-2">
+                <span class="number">{{ likeNum }}</span>
                 <img src="https://www.pngitem.com/pimgs/m/77-770619_leave-a-reply-cancel-reply-twitter-like-icon.png" alt="tweeter like icon" v-if="ifLike" @click="deleteLike">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT-xxei2BZj50qLOyvtuvF7s3RmxqMPoT9wNg&usqp=CAU" alt="tweeter unlike icon" v-else @click="createLike">
             </div>
-            <div id="unit-3">
+            <div class="unit-3">
                 <img v-if="tweet.username == logUser" @click="updateTweet" src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt="tweeter update icon">
                 <img v-if="tweet.username == logUser" @click="deleteTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST1mtZCRWh6vOvjwovfizM2BvKFMTiCDawFw&usqp=CAU" alt="tweeter delete icon">
             </div>
+            <div class="unit-4">
+                <span class="number">{{ retweetNum }}</span>
+                <img v-if="retweetStatus == true" @click="retweetChoice" src="https://lh3.googleusercontent.com/proxy/GQphO5RtcWhE5Zk_lJ1EwVZzuAGcbH_3_8_c3GoXzgoVeq2_b_hod4WzUYa1yeARrlTNtcunvi5mVM-NZd39quDkyAu_ARGyPx8srKS1luGXiFBV_uY56SU22O0IKg" alt="retweet">
+                <img v-else @click="retweetChoice" src="https://static.thenounproject.com/png/1459244-200.png" alt="untweet">
+            </div>
             <div></div>
         </div>
-        <div id="container-4" v-if="display == true">
+        <div class="container-4" v-if="display == true">
             <comment class="comments" v-for="comment in comments" :key="comment.id" :comment="comment">
             </comment>
         </div>
@@ -55,7 +60,9 @@ import Comment from "./AComment.vue"
                 likeNum: "",
                 display: false,
                 comments: [],
-                commentNum: ""
+                commentNum: "",
+                retweetNum: "",
+                retweetStatus: false
             }
         },
         methods: {
@@ -170,12 +177,93 @@ import Comment from "./AComment.vue"
                 }).catch((error) => {
                     console.log(error)
                 });
-            }  
+            },
+            // getRetweet: function() {
+            //     axios.request({
+            //     url: "http://127.0.0.1:5000/retweets",
+            //     method: "GET",
+            //     headers: {
+            //     "Content-Type": "application/json",
+            //     },
+            //     params: {
+            //         user_id: cookies.get("userId"),
+            //     }
+            //     }).then((response) => {
+            //         console.log(response.data);
+            //         for(let i=0; i<response.data.length; i++) {
+            //             if(response.data[i].tweet_id == this.tweet.id) {
+            //                 this.retweetNum = response.data.retweet_amount;
+            //                 console.log(this.retweetNum)
+            //             }
+            //         }
+            //     }).catch((error) => {
+            //         console.log(error)
+            //     })
+            // }, 
+            retweetCheck: function() {
+                for(let i=0; i<this.$store.state.retweets.length; i++) {
+                    if(this.tweet.id == this.$store.state.retweets[i].tweet_id) {
+                        this.retweetNum = this.$store.state.retweets[i].retweet_amount
+                        this.retweetStatus = true;
+                        return
+                    } 
+                }
+                this.retweetStatus = false;
+            },
+            createRetweet: function() {
+                axios.request({
+                    url: "http://127.0.0.1:5000/retweets",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                       token: this.token,
+                       tweet_id: this.tweet.id
+                    }
+                }).then((response) => {
+                    console.log(response.data);
+                    this.retweetStatus = true;
+                    this.retweetNum++
+                    this.$store.dispatch("getAllRetweets");
+                }).catch((error) => {
+                    console.log(error)
+                });
+            },
+            deleteRetweet: function() {
+                axios.request({
+                    url: "http://127.0.0.1:5000/retweets",
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                        token: cookies.get("loginToken"),
+                        tweet_id: this.tweet.id
+                    }
+                }).then((response) => {
+                    console.log(response);
+                    this.retweetStatus = false;
+                    this.retweetNum--
+                    this.$store.dispatch("getAllRetweets");
+                }).catch((error) => {
+                    console.log(error);
+                })
+            },
+            retweetChoice: function() {
+               if(this.retweetStatus == true) {
+                   return this.deleteRetweet();
+               }else if(this.retweetStatus == false) {
+                   return this.createRetweet();
+               }
+           } 
         },  
         mounted () {
             this.getComments();
             this.getLike();
             this.$store.dispatch("getAllTweets");
+            this.$store.dispatch("getAllRetweets");
+            this.retweetCheck()
         },
         computed: {
             logUser() {
@@ -193,7 +281,7 @@ import Comment from "./AComment.vue"
     box-sizing: border-box;
 }
 
-#tweet-unit {
+.tweet-unit {
     min-height: 5vh;
     width: 90%;
     display: grid;
@@ -201,7 +289,7 @@ import Comment from "./AComment.vue"
     align-items: center; 
 }
 
-#container-1 {
+.container-1 {
     width: 100%;
     height: 5vh;
     grid-template-columns: 30% 50% 20%;
@@ -225,7 +313,7 @@ import Comment from "./AComment.vue"
     }
 }
 
-#container-2 {
+.container-2 {
     width: 100%;
     min-height: 5vh;
     display: grid;
@@ -241,7 +329,7 @@ import Comment from "./AComment.vue"
     }
 }
 
-#container-3 {
+.container-3 {
     width: 100%;
     height: 5vh;
     display: grid;
@@ -251,7 +339,7 @@ import Comment from "./AComment.vue"
     grid-template-columns: 5% repeat(4, 1fr) 5%;
     
 
-    #unit-1 {
+    .unit-1 {
         height: 100%;
         width: 100%;
         display: grid;
@@ -271,7 +359,7 @@ import Comment from "./AComment.vue"
         }
     }
     
-    #unit-2 {
+    .unit-2 {
         width: 100%;
         height: 100%;
         display: grid;
@@ -279,7 +367,7 @@ import Comment from "./AComment.vue"
         align-items: center;
         grid-template-columns: 1fr 1.5fr;
 
-        #like-active {
+        .number {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
             color: #AAB8C2;
@@ -291,7 +379,7 @@ import Comment from "./AComment.vue"
         }
     }
 
-    #unit-3 {
+    .unit-3 {
     width: 100%;
     height: 5vh;
     display: grid;
@@ -307,10 +395,30 @@ import Comment from "./AComment.vue"
             border-bottom: 1px solid #657786;
             background-color: white;
         }
-    }   
+    }
+
+    .unit-4 {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: 1fr 1.5fr;
+
+        .number {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            color: #AAB8C2;
+            font-weight: bold;
+        }
+        
+        img {
+            width: 20px;
+        }
+    }
 }
 
-#container-4 {
+.container-4 {
     width: 100%;
     min-height: 30vh;
     display: grid;
