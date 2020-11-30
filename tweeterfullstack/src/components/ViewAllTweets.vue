@@ -12,6 +12,12 @@ import ViewATweet from "./ViewATweet.vue"
         components: {
             ViewATweet
         },
+        // props: {
+        //     retweet: {
+        //         type: Object,
+        //         required: true
+        //     }
+        // },
         computed: {
             tweetList: function() {
                 return this.$store.state.tweetList;

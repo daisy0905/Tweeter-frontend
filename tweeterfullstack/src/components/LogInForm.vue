@@ -48,12 +48,13 @@ import cookies from 'vue-cookies'
                     cookies.set("userEmail", response.data.email);
                     this.$store.dispatch("getAllUsers");
                     this.$store.dispatch("getAllTweets");
+                    this.$store.dispatch("getAllRetweets");
                     this.$store.dispatch("getUserFollowing");
                     // if(this.$store.state.follows.length != "null") {
                     //     this.loginStatus = "Success!"
                     //     this.$router.push("/home")
                     // }
-                    setTimeout(()=>{this.$router.push("/home")}, 4000);
+                    setTimeout(()=>{this.$router.push("/home")}, 6000);
                 }).catch((error) => {
                     console.log(error);
                     this.loginStatus = "Error";

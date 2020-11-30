@@ -42,6 +42,7 @@
                 <button class="tweet-btn" @click="viewTweets">Tweets</button>
             </div>
         </div>
+        <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet"></a-retweet>
         <view-a-tweet class="tweets" v-for="tweet in othertweets" :key="tweet.id" :tweet="tweet"></view-a-tweet>
         <div id="tweet-icon">
             <img v-if="name== logUser" @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
@@ -52,11 +53,19 @@
 <script>
 import cookies from 'vue-cookies'
 import ViewATweet from '../components/ViewATweet.vue'
+import ARetweet from '../components/ARetweet.vue'
 import axios from 'axios'
 
     export default {
         components: {
-            ViewATweet
+            ViewATweet,
+            ARetweet
+        },
+        props: {
+            retweet: {
+                type: Object,
+                required: true
+            }
         },
         data() {
             return {
@@ -115,11 +124,29 @@ import axios from 'axios'
             createTweet: function() {
                 this.$router.push("/tweet");
             },
+            getRetweets: function() {
+                axios.request({
+                url: "http://127.0.0.1:5000/retweets",
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                params: {
+                    user_id: cookies.get("otherId"),
+                }
+                }).then((response) => {
+                    console.log(response.data);
+                    this.retweets = response.data;
+                }).catch((error) => {
+                    console.log(error)
+                })
+            },
         },
         mounted () {
             this.getTweets();
             this.$store.dispatch("getFollowing");
             this.$store.dispatch("getFollower");
+            this.getRetweets()
         },
         computed: {
             followingNum: function() {

@@ -25,8 +25,7 @@
             </div>
             <div class="unit-4">
                 <span class="number">{{ retweetNum }}</span>
-                <img v-if="retweetStatus == true" @click="retweetChoice" src="https://lh3.googleusercontent.com/proxy/GQphO5RtcWhE5Zk_lJ1EwVZzuAGcbH_3_8_c3GoXzgoVeq2_b_hod4WzUYa1yeARrlTNtcunvi5mVM-NZd39quDkyAu_ARGyPx8srKS1luGXiFBV_uY56SU22O0IKg" alt="retweet">
-                <img v-else @click="retweetChoice" src="https://static.thenounproject.com/png/1459244-200.png" alt="untweet">
+                <retweet-btn :tweetId="tweet.id"></retweet-btn>
             </div>
             <div></div>
         </div>
@@ -42,10 +41,12 @@
 import cookies from 'vue-cookies'
 import axios from 'axios'
 import Comment from "./AComment.vue"
+import RetweetBtn from "./RetweetButton.vue"
     export default {
         name: "a-tweet",
         components: {
             Comment,
+            RetweetBtn
         },
         props: {
             tweet: {
@@ -62,7 +63,6 @@ import Comment from "./AComment.vue"
                 comments: [],
                 commentNum: "",
                 retweetNum: "",
-                retweetStatus: false
             }
         },
         methods: {
@@ -200,70 +200,25 @@ import Comment from "./AComment.vue"
             //         console.log(error)
             //     })
             // }, 
+            // intConvert: function() {
+            //     this.user_id = parseInt(cookies.get("userId"))
+            // }
             retweetCheck: function() {
+                this.$store.dispatch("getAllRetweets");
                 for(let i=0; i<this.$store.state.retweets.length; i++) {
                     if(this.tweet.id == this.$store.state.retweets[i].tweet_id) {
                         this.retweetNum = this.$store.state.retweets[i].retweet_amount
-                        this.retweetStatus = true;
-                        return
                     } 
                 }
-                this.retweetStatus = false;
             },
-            createRetweet: function() {
-                axios.request({
-                    url: "http://127.0.0.1:5000/retweets",
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    data: {
-                       token: this.token,
-                       tweet_id: this.tweet.id
-                    }
-                }).then((response) => {
-                    console.log(response.data);
-                    this.retweetStatus = true;
-                    this.retweetNum++
-                    this.$store.dispatch("getAllRetweets");
-                }).catch((error) => {
-                    console.log(error)
-                });
-            },
-            deleteRetweet: function() {
-                axios.request({
-                    url: "http://127.0.0.1:5000/retweets",
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    data: {
-                        token: cookies.get("loginToken"),
-                        tweet_id: this.tweet.id
-                    }
-                }).then((response) => {
-                    console.log(response);
-                    this.retweetStatus = false;
-                    this.retweetNum--
-                    this.$store.dispatch("getAllRetweets");
-                }).catch((error) => {
-                    console.log(error);
-                })
-            },
-            retweetChoice: function() {
-               if(this.retweetStatus == true) {
-                   return this.deleteRetweet();
-               }else if(this.retweetStatus == false) {
-                   return this.createRetweet();
-               }
-           } 
+            
         },  
         mounted () {
+            setTimeout(()=>{this.retweetCheck()}, 3000);
             this.getComments();
             this.getLike();
             this.$store.dispatch("getAllTweets");
             this.$store.dispatch("getAllRetweets");
-            this.retweetCheck()
         },
         computed: {
             logUser() {
@@ -398,22 +353,18 @@ import Comment from "./AComment.vue"
     }
 
     .unit-4 {
-        width: 100%;
+        width: 90%;
         height: 100%;
         display: grid;
         justify-items: center;
         align-items: center;
-        grid-template-columns: 1fr 1.5fr;
+        grid-template-columns: 1fr 1fr;
 
         .number {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
             color: #AAB8C2;
             font-weight: bold;
-        }
-        
-        img {
-            width: 20px;
         }
     }
 }

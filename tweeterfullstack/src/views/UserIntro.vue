@@ -44,9 +44,6 @@
             <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet"></a-retweet>
             <view-a-tweet class="tweets" v-for="tweet in tweets" :key="tweet.id" :tweet="tweet" :retweet="retweet"></view-a-tweet>
         </div>
-        <div id="tweet-icon">
-            <img @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
-        </div>
     </div>
 </template>
 
@@ -61,16 +58,16 @@ import axios from 'axios'
             ViewATweet,
             ARetweet
         },
-        props: {
-            retweet: {
-                type: Object,
-                required: true
-            }
-        },
+        // props: {
+        //     retweet: {
+        //         type: Object,
+        //         required: true
+        //     }
+        // },
         data() {
             return {
                 tweets: [],
-                retweets: []
+                retweets: [],
             }
         },
         methods: {
@@ -144,7 +141,8 @@ import axios from 'axios'
             this.getTweets();
             this.$store.dispatch("getUserFollowing");
             this.$store.dispatch("getUserFollower");
-            this.$store.dispatch("getProfile")
+            this.$store.dispatch("getProfile");
+            this.getRetweets()
         },
         computed: {
             followingNum: function() {
@@ -171,7 +169,7 @@ import axios from 'axios'
             created_at: function() {
                 return this.$store.state.user.created_at
             },
-        }
+        },
     }
 </script>
 

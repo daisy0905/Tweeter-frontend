@@ -23,6 +23,7 @@ export default new Vuex.Store({
   mutations: {
     updateProfile: function(state, data) {
       state.user = data;
+      console.log(state.user)
       state.status = "Success";
     },
     updateTweets: function(state, data) {
@@ -60,7 +61,7 @@ export default new Vuex.Store({
             "Content-Type": "application/json",
         },
         params: {
-            userId: cookies.get("userId"),
+            id: cookies.get("userId"),
             loginToken: state.token
         }
     }).then((response) => {
@@ -201,6 +202,7 @@ export default new Vuex.Store({
         console.log(error)
       })
     },
+    
   },
   modules: {}
 });
