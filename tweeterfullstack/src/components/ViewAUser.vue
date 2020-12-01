@@ -1,13 +1,14 @@
 <template>
     <div id="user">
         <div id="container-1">
-            <img @click="getProfile" :src="user.image" alt="user image">
+            <img id="profile" @click="getProfile" :src="user.image" alt="user image">
         </div>
         <div id="container-2">
             <h3>{{ user.username }}</h3>
             <p>{{ user.bio }}</p>
             <follow :userId="user.id"></follow>
         </div>
+        <profile-card :userId="user.id"></profile-card>
     </div>
 </template>
 
@@ -15,11 +16,13 @@
 import Follow from './Follow.vue'
 import cookies from 'vue-cookies'
 import axios from 'axios'
+import ProfileCard from './ProfileCard.vue'
 
     export default {
         name: "view-a-user",
         components: {
-            Follow
+            Follow,
+            ProfileCard
         },
         props: {
             user: {
@@ -52,12 +55,35 @@ import axios from 'axios'
                     console.log(error);
                 })
             },
+            getProfileCard: function() {
+                let ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                        let user = JSON.parse(this.responseText);
+                        this.userName = user[0].username;
+                        this.userImage = user[0].image;
+                        this.userBio = user[0].bio;
+                        this.userBirthdate = user[0].birthdate;
+                        this.userCreated_at = user[0].created_at;
+                    } else if(this.readyState !=4) {
+                        document.getElementById("getProfile").innerHTML = "Loading!";
+                    } else {
+                        document.getElementById("getProfile").innerHTML = "failed!";
+                    }
+                }
+                ajax.open("GET", "http://127.0.0.1:5000/users", true);
+                ajax.send(); 
+            },
         },
         computed: {
             users: function() {
                 return this.$store.state.users
             }
-        }
+        },
+        // mounted () {
+        //     document.getElementById("profile").addEventListener("mouseover", this.getProfileCard())
+        // },
     }
 </script>
 

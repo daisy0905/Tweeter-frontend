@@ -1,6 +1,6 @@
 <template>
     <div class="retweet-btn">
-        <img v-if="retweetStatus == true " @click="retweetChoice" src="https://lh3.googleusercontent.com/proxy/GQphO5RtcWhE5Zk_lJ1EwVZzuAGcbH_3_8_c3GoXzgoVeq2_b_hod4WzUYa1yeARrlTNtcunvi5mVM-NZd39quDkyAu_ARGyPx8srKS1luGXiFBV_uY56SU22O0IKg" alt="retweet">
+        <img v-if="retweetStatus == true " @click="retweetChoice" src="https://lh3.googleusercontent.com/proxy/EpiTBQuuPgAgxZEQAZp3KF1uHX_v1hZi1Y_kE2ztqItlEY9Fr894vaLd4UkqkQRriiehvusSx6Hu0_TCzeZOKjuRo61Vq8FUQy3blpvmDP9L97_d7aJIRzHMLsrs8A" alt="retweet">
         <img v-else  @click="retweetChoice" src="https://static.thenounproject.com/png/1459244-200.png" alt="untweet">
     </div>
 </template>

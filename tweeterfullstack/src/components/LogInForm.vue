@@ -29,7 +29,6 @@ import cookies from 'vue-cookies'
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
-                    "X-Api-Key": "NvrMZ9Fj0jRrjYf2As0M7gpnhYC7k4ltci5mZkZGGeY2G"
                     },
                     data: {
                        username: this.username,
