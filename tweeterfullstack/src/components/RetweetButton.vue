@@ -1,7 +1,10 @@
 <template>
-    <div class="retweet-btn">
-        <img v-if="retweetStatus == true " @click="retweetChoice" src="https://lh3.googleusercontent.com/proxy/EpiTBQuuPgAgxZEQAZp3KF1uHX_v1hZi1Y_kE2ztqItlEY9Fr894vaLd4UkqkQRriiehvusSx6Hu0_TCzeZOKjuRo61Vq8FUQy3blpvmDP9L97_d7aJIRzHMLsrs8A" alt="retweet">
-        <img v-else  @click="retweetChoice" src="https://static.thenounproject.com/png/1459244-200.png" alt="untweet">
+    <div class="retweet-check">
+        <span class="number">{{ retweetNum }}</span>
+        <div class="retweet-btn">
+            <img v-if="retweetStatus == true " @click="retweetChoice" src="../assets/retweet-icon.png" alt="retweet">
+            <img v-else  @click="retweetChoice" src="https://static.thenounproject.com/png/1459244-200.png" alt="untweet">
+        </div>
     </div>
 </template>
 
@@ -15,7 +18,7 @@ import axios from 'axios'
             return {
                 retweetStatus: false,
                 token: cookies.get("loginToken"),
-                retweetNum: "",
+                retweetNum: 0,
                 userId: cookies.get("userId")
             }
         },
@@ -27,6 +30,14 @@ import axios from 'axios'
 
         },
         methods: {
+            retweetCheck: function() {
+                this.$store.dispatch("getAllRetweets");
+                for(let i=0; i<this.$store.state.retweets.length; i++) {
+                    if(this.tweetId == this.$store.state.retweets[i].tweet_id) {
+                        this.retweetNum = this.$store.state.retweets[i].retweet_amount
+                    } 
+                }
+            },
             userCheck: function() {
                 this.$store.dispatch("getAllRetweets")
                 for(let i=0; i<this.$store.state.retweets.length; i++) {
@@ -51,7 +62,7 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response.data);
                     this.retweetStatus = true;
-                    this.userCheck()
+                    this.retweetNum++;
                 }).catch((error) => {
                     console.log(error)
                 });
@@ -70,7 +81,7 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response);
                     this.retweetStatus = false;
-                    this.userCheck()
+                    this.retweetNum--;
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -85,6 +96,7 @@ import axios from 'axios'
         },
         mounted () {
             this.$store.dispatch("getAllRetweets");
+            setTimeout(()=>{this.retweetCheck()}, 3000);
             this.userCheck();
         }
 
@@ -92,6 +104,20 @@ import axios from 'axios'
 </script>
 
 <style lang="scss" scoped>
+.retweet-check {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    .number {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            color: #AAB8C2;
+            font-weight: bold;
+        }
+
     .retweet-btn {
         width: 100%;
         height: 100%;
@@ -111,4 +137,5 @@ import axios from 'axios'
             width: 20px;
         }
     }
+}
 </style>

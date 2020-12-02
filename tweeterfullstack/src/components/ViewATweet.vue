@@ -1,8 +1,9 @@
 <template>
     <div class="tweet-unit">
         <div class="container-1">
-            <h3>{{ tweet.username }}</h3>
+            <h3 @mouseenter="viewProfileCard" @mouseleave="leaveProfileCard">{{ tweet.username }}</h3>
             <h4>{{ tweet.created_at }}</h4>
+            <profile-card :userId="tweet.user_id" v-if="show == true" class="profile-card"></profile-card>
             <div></div>
         </div>
         <div class="container-2">
@@ -23,17 +24,13 @@
                 <img v-if="tweet.username == logUser" @click="updateTweet" src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt="tweeter update icon">
                 <img v-if="tweet.username == logUser" @click="deleteTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST1mtZCRWh6vOvjwovfizM2BvKFMTiCDawFw&usqp=CAU" alt="tweeter delete icon">
             </div>
-            <div class="unit-4">
-                <span class="number">{{ retweetNum }}</span>
-                <retweet-btn :tweetId="tweet.id"></retweet-btn>
-            </div>
+            <retweet-btn class="unit-4" :tweetId="tweet.id"></retweet-btn>
             <div></div>
         </div>
         <div class="container-4" v-if="display == true">
             <comment class="comments" v-for="comment in comments" :key="comment.id" :comment="comment">
             </comment>
         </div>
-        
     </div>
 </template>
 
@@ -42,11 +39,13 @@ import cookies from 'vue-cookies'
 import axios from 'axios'
 import Comment from "./AComment.vue"
 import RetweetBtn from "./RetweetButton.vue"
+import ProfileCard from './ProfileCard.vue'
     export default {
         name: "a-tweet",
         components: {
             Comment,
-            RetweetBtn
+            RetweetBtn,
+            ProfileCard
         },
         props: {
             tweet: {
@@ -62,7 +61,8 @@ import RetweetBtn from "./RetweetButton.vue"
                 display: false,
                 comments: [],
                 commentNum: "",
-                retweetNum: "",
+                // retweetNum: "",
+                show: false
             }
         },
         methods: {
@@ -178,43 +178,15 @@ import RetweetBtn from "./RetweetButton.vue"
                     console.log(error)
                 });
             },
-            // getRetweet: function() {
-            //     axios.request({
-            //     url: "http://127.0.0.1:5000/retweets",
-            //     method: "GET",
-            //     headers: {
-            //     "Content-Type": "application/json",
-            //     },
-            //     params: {
-            //         user_id: cookies.get("userId"),
-            //     }
-            //     }).then((response) => {
-            //         console.log(response.data);
-            //         for(let i=0; i<response.data.length; i++) {
-            //             if(response.data[i].tweet_id == this.tweet.id) {
-            //                 this.retweetNum = response.data.retweet_amount;
-            //                 console.log(this.retweetNum)
-            //             }
-            //         }
-            //     }).catch((error) => {
-            //         console.log(error)
-            //     })
-            // }, 
-            // intConvert: function() {
-            //     this.user_id = parseInt(cookies.get("userId"))
-            // }
-            retweetCheck: function() {
-                this.$store.dispatch("getAllRetweets");
-                for(let i=0; i<this.$store.state.retweets.length; i++) {
-                    if(this.tweet.id == this.$store.state.retweets[i].tweet_id) {
-                        this.retweetNum = this.$store.state.retweets[i].retweet_amount
-                    } 
-                }
+            viewProfileCard: function() {
+                this.show = true;
             },
+            leaveProfileCard: function() {
+                this.show = false;
+            }
             
         },  
         mounted () {
-            setTimeout(()=>{this.retweetCheck()}, 3000);
             this.getComments();
             this.getLike();
             this.$store.dispatch("getAllTweets");
@@ -259,6 +231,7 @@ import RetweetBtn from "./RetweetButton.vue"
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
+        position: relative;
     }
 
     h4 {
@@ -266,6 +239,11 @@ import RetweetBtn from "./RetweetButton.vue"
         font-size: 0.8rem; 
         color: #657786;
     }
+
+    .profile-card {
+        width: 60%;
+        position: absolute;
+}
 }
 
 .container-2 {
@@ -359,13 +337,6 @@ import RetweetBtn from "./RetweetButton.vue"
         justify-items: center;
         align-items: center;
         grid-template-columns: 1fr 1fr;
-
-        .number {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.8rem;
-            color: #AAB8C2;
-            font-weight: bold;
-        }
     }
 }
 

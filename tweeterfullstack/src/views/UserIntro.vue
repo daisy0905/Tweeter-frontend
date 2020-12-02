@@ -58,12 +58,12 @@ import axios from 'axios'
             ViewATweet,
             ARetweet
         },
-        // props: {
-        //     retweet: {
-        //         type: Object,
-        //         required: true
-        //     }
-        // },
+        props: {
+            retweet: {
+                type: Object,
+                required: true
+            }
+        },
         data() {
             return {
                 tweets: [],

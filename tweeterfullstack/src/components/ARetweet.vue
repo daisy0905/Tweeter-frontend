@@ -12,7 +12,7 @@
         <div class="container-3">
             <p>{{ retweet.content }}</p>
             <div class="unit-1">
-                <img v-if="retweet.user_id == logId" @click="deleteRetweet" src="https://lh3.googleusercontent.com/proxy/GQphO5RtcWhE5Zk_lJ1EwVZzuAGcbH_3_8_c3GoXzgoVeq2_b_hod4WzUYa1yeARrlTNtcunvi5mVM-NZd39quDkyAu_ARGyPx8srKS1luGXiFBV_uY56SU22O0IKg" alt="retweet icon">
+                <img v-if="retweet.user_id == logId" @click="deleteRetweet" src="../assets/retweet-icon.png" alt="retweet icon">
             </div>
         </div>
         <div class="container-4" v-if="display == true">

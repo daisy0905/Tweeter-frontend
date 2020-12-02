@@ -61,12 +61,12 @@ import axios from 'axios'
             ViewATweet,
             ARetweet
         },
-        props: {
-            retweet: {
-                type: Object,
-                required: true
-            }
-        },
+        // props: {
+        //     retweet: {
+        //         type: Object,
+        //         required: true
+        //     }
+        // },
         data() {
             return {
                 name: cookies.get("name"),
@@ -76,6 +76,7 @@ import axios from 'axios'
                 image: cookies.get("image"),
                 othertweets: [],
                 logUser: cookies.get("userName"),
+                retweets: []
             }
         },
         methods: {

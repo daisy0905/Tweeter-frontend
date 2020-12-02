@@ -8,7 +8,6 @@
             <p>{{ user.bio }}</p>
             <follow :userId="user.id"></follow>
         </div>
-        <profile-card :userId="user.id"></profile-card>
     </div>
 </template>
 
@@ -16,13 +15,11 @@
 import Follow from './Follow.vue'
 import cookies from 'vue-cookies'
 import axios from 'axios'
-import ProfileCard from './ProfileCard.vue'
 
     export default {
         name: "view-a-user",
         components: {
             Follow,
-            ProfileCard
         },
         props: {
             user: {
@@ -55,35 +52,12 @@ import ProfileCard from './ProfileCard.vue'
                     console.log(error);
                 })
             },
-            getProfileCard: function() {
-                let ajax = new XMLHttpRequest();
-                ajax.onreadystatechange = function() {
-                    if(this.readyState == 4 && this.status == 200) {
-                        console.log(this.responseText);
-                        let user = JSON.parse(this.responseText);
-                        this.userName = user[0].username;
-                        this.userImage = user[0].image;
-                        this.userBio = user[0].bio;
-                        this.userBirthdate = user[0].birthdate;
-                        this.userCreated_at = user[0].created_at;
-                    } else if(this.readyState !=4) {
-                        document.getElementById("getProfile").innerHTML = "Loading!";
-                    } else {
-                        document.getElementById("getProfile").innerHTML = "failed!";
-                    }
-                }
-                ajax.open("GET", "http://127.0.0.1:5000/users", true);
-                ajax.send(); 
-            },
         },
         computed: {
             users: function() {
                 return this.$store.state.users
             }
         },
-        // mounted () {
-        //     document.getElementById("profile").addEventListener("mouseover", this.getProfileCard())
-        // },
     }
 </script>
 
@@ -93,15 +67,6 @@ import ProfileCard from './ProfileCard.vue'
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.user {
-    min-height: 40vh;
-    width: 90%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-    align-items: center; 
 }
 
 #user {
@@ -140,12 +105,13 @@ import ProfileCard from './ProfileCard.vue'
     justify-items: center;
     align-items: center;
     grid-template-rows: 1fr 1.5fr 1.5fr;
+    position: relative;
 
     h3 {
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
-        }
+    }
 
     p {
         margin: 0 0.5em 0 0.5em;

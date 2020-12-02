@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="button-container">
         <button v-if="userFollow == true" @click="followChoice" id="follow-btn">Following</button>
         <button v-else @click="followChoice" id="following-btn">Follow</button>
     </div>
@@ -85,26 +85,32 @@ import axios from 'axios'
 </script>
 
 <style lang="scss" scoped>
-    #following-btn {
-        width: 25vw;
+    #button-container {
+        width: 70%;
         height: 5vh;
-        background-color: white;
-        color: #1DA1F2;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        border: 1px solid #1DA1F2;
-        border-radius: 1.5em;
-        font-weight: bold;
-    }
-    #follow-btn {
-        width: 25vw;
-        height: 5vh;
-        background-color: #1DA1F2;
-        color: white;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        border-radius: 1.5em;
-        font-weight: bold;
-        border: none;
+
+        #following-btn {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            color: #1DA1F2;
+            border: 1px solid #1DA1F2;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            border-radius: 1.5em;
+            font-weight: bold;
+        }
+
+        #follow-btn {
+            width: 100%;
+            height: 100%;
+            background-color: #1DA1F2;
+            color: white;
+            border: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8rem;
+            border-radius: 1.5em;
+            font-weight: bold;
+        }
     }
 </style>
