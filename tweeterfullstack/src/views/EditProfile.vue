@@ -2,7 +2,7 @@
     <div id="userIntro">
         <div id="container-1">
             <img @click="backToProfile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvz8HF_jjIpaNgkrFzcw9E2N9Y6SA13DfCcQ&usqp=CAU" alt="icon of back to home page">
-            <h3>Edit Profile</h3>
+            <h3>Profile</h3>
             <div></div>
             <button @click="updateProfile">Update</button>
         </div>

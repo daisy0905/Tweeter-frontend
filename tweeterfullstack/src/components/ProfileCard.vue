@@ -47,12 +47,14 @@
                         this.image = user.image;
                         this.id = user.id;
                     }
+                    else {
+                        this.$store.dispatch("getAllUsers")
+                    }
                 }
             }
         }, 
         mounted () {
             this.getProfileCard();
-            this.$store.dispatch("getFollowing");
         } 
     }
 

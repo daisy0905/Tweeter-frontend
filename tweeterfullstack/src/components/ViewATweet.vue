@@ -7,6 +7,7 @@
             <div></div>
         </div>
         <div class="container-2">
+            <img :src="tweet.image" alt="image of tweet">
             <p>{{ tweet.content }}</p>
         </div>
         <div class="container-3">
@@ -61,8 +62,8 @@ import ProfileCard from './ProfileCard.vue'
                 display: false,
                 comments: [],
                 commentNum: "",
-                // retweetNum: "",
-                show: false
+                show: false,
+                image: "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg"
             }
         },
         methods: {
@@ -131,8 +132,8 @@ import ProfileCard from './ProfileCard.vue'
                     this.likeNum = response.data.length;
                     for(let i=0; i<response.data.length; i++) {
                     if(response.data[i].username == cookies.get("userName")) {
-                    this.ifLike = true;
-                    return
+                        this.ifLike = true;
+                        return
                     }
                     this.ifLike = false;
                 }
@@ -189,8 +190,8 @@ import ProfileCard from './ProfileCard.vue'
         mounted () {
             this.getComments();
             this.getLike();
-            this.$store.dispatch("getAllTweets");
-            this.$store.dispatch("getAllRetweets");
+            // this.$store.dispatch("getAllTweets");
+            // this.$store.dispatch("getAllRetweets");
         },
         computed: {
             logUser() {
@@ -247,18 +248,26 @@ import ProfileCard from './ProfileCard.vue'
 }
 
 .container-2 {
-    width: 100%;
+    width: 80%;
     min-height: 5vh;
     display: grid;
     justify-items: center;
     align-items: center; 
     margin-top: 0.5em;
-    
+
+    img {
+        width: 100%;
+        border-radius: 2em 2em 0 0;
+    }
 
     p {
-    width: 90%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.8rem;
+        width: 100%;
+        height: 10vh;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8rem;
+        padding: 0.5em 0 0 0.5em;
+        background-color: lightgrey;
+        border-radius: 0 0 2em 2em;
     }
 }
 

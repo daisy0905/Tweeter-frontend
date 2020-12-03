@@ -1,40 +1,24 @@
 <template>
-    <div class="following">
-        <div class="container-1">
-            <img :src="follow.image" alt="users the loged in user follows">
+    <div class="follower">
+       <div class="container-1">
+            <img :src="follower.image" alt="users the loged in user follows">
         </div>
         <div class="container-2">
-            <h3>{{ follow.username }}</h3>
-            <p>Birthdate: {{ follow.birthdate }}</p>
-            <p>Bio: {{ follow.bio }}</p>
-            <p>Email: {{ follow.email }}</p>
+            <h3>{{ follower.username }}</h3>
+            <p>{{ follower.bio }}</p>
         </div>
-        <follow v-if="name== logUser" :userId="follow.follow_id" class="container-3"></follow>
+        <div></div>
     </div>
 </template>
 
 <script>
-import Follow from './Follow.vue'
-import cookies from 'vue-cookies'
 
     export default {
-        name: "following",
-        components: {
-            Follow,
-        },
-        data() {
-            return {
-                name: cookies.get("name"),
-                logUser: cookies.get("userName")
-            }
-        },
+        name: "follower",
         props: {
-            follow: {
+            follower: {
                 type: Object,
                 required: true
-            },
-            userId: {
-                type: Number
             } 
         }
     }
@@ -48,13 +32,13 @@ import cookies from 'vue-cookies'
     box-sizing: border-box;
 }
 
-.following {
+.follower {
     height: 100%;
     width: 100%;
     display: grid;
     justify-items: center;
     align-items: center; 
-    grid-template-columns: 20% 50% 30%;
+    grid-template-columns: 20% 80%;
     border-bottom: 1px solid #E1E8ED;
     margin: 0 0 1em 0;
 }
@@ -93,14 +77,6 @@ import cookies from 'vue-cookies'
         font-size: 0.8rem;
         text-align: left;
     }
-}
-
-.container-3 {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    justify-items: center;
-    align-items: center;
 }
 
 </style>

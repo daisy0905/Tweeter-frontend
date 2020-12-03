@@ -1,15 +1,15 @@
 <template>
-    <div id="following">
-        <div id="container-1">
+    <div class="following">
+        <div class="container-1">
             <img :src="follow.image" alt="users the loged in user follows">
         </div>
-        <div id="container-2">
+        <div class="container-2">
             <h3>{{ follow.username }}</h3>
             <p>Birthdate: {{ follow.birthdate }}</p>
             <p>Bio: {{ follow.bio }}</p>
             <p>Email: {{ follow.email }}</p>
         </div>
-        <follow :userId="follow.follow_id" id="container-3"></follow>
+        <follow :userId="follow.follow_id" class="container-3"></follow>
     </div>
 </template>
 
@@ -41,7 +41,7 @@ import Follow from './Follow.vue'
     box-sizing: border-box;
 }
 
-#following {
+.following {
     height: 100%;
     width: 100%;
     display: grid;
@@ -52,7 +52,7 @@ import Follow from './Follow.vue'
     margin: 0 0 1em 0;
 }
 
-#container-1 {
+.container-1 {
     height: 100%;
     width: 100%;
     display: grid;
@@ -67,7 +67,7 @@ import Follow from './Follow.vue'
     }
 }
 
-#container-2 {
+.container-2 {
     height: 100%;
     width: 100%;
     display: grid;
@@ -87,7 +87,7 @@ import Follow from './Follow.vue'
         text-align: left;
     }
 }
-#container-3 {
+.container-3 {
     height: 100%;
     width: 100%;
     display: grid;

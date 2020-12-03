@@ -1,18 +1,16 @@
 <template>
     <div>
-        <follower class="followers" v-for="follower in userfollowers" :key="follower.user_id" :follower="follower">
-
-        </follower>
+        <user-follower class="followers" v-for="follower in userfollowers" :key="follower.user_id" :follower="follower"></user-follower>
     </div>
 </template>
 
 <script>
-import Follower from './Follower'
+import UserFollower from './UserFollower'
 
     export default {
         name: "followings",
         components: {
-            Follower
+            UserFollower
         },
         computed: {
             userfollowers: function() {

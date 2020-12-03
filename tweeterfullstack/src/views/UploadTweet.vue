@@ -9,7 +9,13 @@
         </div>
         <div id="container-2">
             <img :src="UserPhoto" id="userPhoto" alt="user image"> 
+            <h3>Tweeter Content</h3>
             <textarea id="tweet-text" v-model="content"></textarea>
+        </div>
+        <div id="container-3">
+            <h3>Tweeter Image URL</h3>
+            <input type="text" id="image-input" class="input" v-model="image">
+                <img :src="image" alt="image preview">
         </div>
         <div id="tweet-btn">
             <button @click="createTweet">Create Tweet</button>
@@ -30,8 +36,9 @@ import axios from 'axios'
                 UserPhoto: cookies.get("userImage"),
                 token: cookies.get("loginToken"),
                 content: "",
+                image: "",
                 tweet: {},
-                tweetStatus: "Tweets!"
+                tweetStatus: "Tweets!",
             }
         },
         methods: {
@@ -51,7 +58,8 @@ import axios from 'axios'
                    },
                    data: {
                        token: this.token,
-                       content: this.content
+                       content: this.content,
+                       image: this.image
                    }
                 }).then((response) => {
                    console.log(response);
@@ -74,7 +82,8 @@ import axios from 'axios'
                     data: {
                         token: this.token,
                         id: cookies.get("userTweetId"),
-                        content: this.content
+                        content: this.content,
+                        image: this.image
                     }
                 }).then((response) => {
                     console.log(response);
@@ -129,27 +138,63 @@ import axios from 'axios'
 }
 
 #container-2 {
-    min-height: 50vh;
+    min-height: 40vh;
     width: 100%;
     display: grid;
     justify-items: center;
     align-items: center;
 
     #userPhoto {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+    }
 
     #tweet-text {
         width: 80%;
-        height: 40vh;
+        height: 20vh;
         background-color: #E1E8ED;
         border: 1px solid #AAB8C2;
         margin: 0 0 1em 0;
         border-bottom: 1px solid #1DA1F2;
         text-align: center;
+    }
+}
+
+#container-3 {
+    height: 25vh;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 1em;
+
+    h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 1em;
+    }
+
+    .input {
+        width: 80%;
+        height: 7vh;
+        background-color: #E1E8ED;
+        border: 1px solid #AAB8C2;
+        margin: 0 0 1em 0;
+        border-bottom: 1px solid #1DA1F2;
+        text-align: center;
+    }
+
+    img {
+        width: 100px;
     }
 }
 

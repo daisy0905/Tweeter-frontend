@@ -2,14 +2,23 @@
     <div id="home">
         <div v-if="login" class="login">
             <div id="user-header">
-                <img @click="viewUserProfile" id="user-image" :src="image" alt="user image">
-                <div>
+                <div id="header-unit-1">
+                    <img @click="viewUserProfile" id="user-image" :src="image" alt="user image">
                     <h3>{{ username }}</h3>
                     <h3>Home</h3>
                 </div>
                 <div></div>
-                <button @click="refresh">Refresh</button>
-                <button @click="userLogout" id="logout">Log Out</button>
+                <div id="header-unit-2">
+                    <div id="unit-1">
+                        <button @click="refresh">Refresh</button>
+                        <div></div>
+                        <button @click="userLogout" id="logout">Log Out</button>
+                    </div>
+                    <div id="unit-2">
+                        <textarea name="search-bar" id="search-bar" v-model="content"></textarea>
+                        <img @click="getTweetList" src="../assets/search-icon.png" alt="search icon">
+                    </div>
+                </div>
             </div>
             <div id="user-container">
                 <h2>Who to Follow</h2>
@@ -57,7 +66,8 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 status: "",
                 display: false,
                 image: "",
-                username: cookies.get("userName")
+                username: cookies.get("userName"),
+                content: "Search for tweet"
             }
         },
         methods: {
@@ -78,6 +88,9 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
                 this.$store.dispatch("getAllRetweets");
+                this.$store.dispatch("getUserFollower");
+                this.$store.dispatch("getFollowing");
+                this.$store.dispatch("getFollower");
             },
             viewUserProfile: function() {
                 this.$router.push("/userintro");
@@ -104,12 +117,15 @@ import DeleteProfile from '../components/DeleteProfile.vue'
             createTweet: function() {
                 this.$router.push("/tweet");
             },
+            getTweetList: function() {
+                cookies.set("tweetContent", this.content);
+                this.$router.push("/tweets")
+            },
             refresh: function() {
                 this.decodeImage();
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
                 this.$store.dispatch("getUserFollowing");
-                this.$store.dispatch("getUserFollower");
                 this.$store.dispatch("getAllRetweets");
             }
         }
@@ -141,39 +157,86 @@ import DeleteProfile from '../components/DeleteProfile.vue'
 
     
     #user-header {
-        height: 10vh;
+        min-height: 10vh;
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: 25% 5% 70%;
         justify-items: center;
         align-items: center;
         border-bottom: 2px solid #1DA1F2;
+        padding-bottom: 1em;
 
-        #user-image {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 50%;
+        #header-unit-1 {
+            min-height: 10vh;
+            width: 100%;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+
+            #user-image {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            h3 {
+                font-weight: bold; 
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                font-size: 1rem;
+            }
         }
 
-        h3 {
-            font-weight: bold; 
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            font-size: 1rem;
-        }
+        #header-unit-2 {
+            min-height: 10vh;
+            width: 100%;
+            display: grid;
+            justify-items: center;
+            align-items: center;
 
-        button {
-            width: 20vw;
-            height: 5vh;
-            border: 1px solid #1DA1F2;
-            color: #1DA1F2;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.8rem;
-            border-radius: 1.5em;
-            font-weight: bold;
-            margin-right: 2em;
-            background-color: white;
+            #unit-1 {
+                height: 10vh;
+                width: 100%;
+                display: grid;
+                justify-items: center;
+                align-items: center;
+                grid-template-columns: 1fr 0.5fr 1fr;
+
+                button {
+                    width: 20vw;
+                    height: 3vh;
+                    border: 1px solid #1DA1F2;
+                    color: #1DA1F2;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 0.8rem;
+                    border-radius: 1.5em;
+                    font-weight: bold;
+                    margin-right: 2em;
+                    background-color: white;
+                }
+            }
+
+            #unit-2 {
+                height: 5vh;
+                width: 100%;
+                display: grid;
+                justify-items: center;
+                align-items: center;
+                grid-template-columns: 80% 20%;
+
+                #search-bar {
+                    height: 100%;
+                    width: 100%;
+                    background-color: white;
+                    border: 2px solid  #1DA1F2;
+                    border-radius: 0.8em;
+                }
+
+                img {
+                    width: 50px;
+                }
+            }
         }
     }
 

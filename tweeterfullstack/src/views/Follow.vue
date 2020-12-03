@@ -135,6 +135,7 @@ import cookies from 'vue-cookies'
 }
 
 .follow {
+    width: 100%;
     min-height: 50vh;
 }
 </style>

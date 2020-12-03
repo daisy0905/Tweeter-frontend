@@ -25,7 +25,7 @@
             <div></div>
         </div>
         <div class="container-4" v-if="display == true">
-            <nested-comment class="nested_comments" v-for="nested_comment in nested_comments" :key="nested_comment.id" :nested_comment="nested_comment"></nested-comment>
+            <nested-comment class="nested_comments" v-for="nested_comment in nested_comments" :key="nested_comment.id" :nested_comment="nested_comment" @update="update" @deleteUpdate="deleteUpdate"></nested-comment>
         </div>
         <div class="container-5" v-if="show == true">
             <textarea class="nested_comment_input" name="comment-area" v-model="nested_content"></textarea>
@@ -191,12 +191,29 @@ import NestedComment from './NestedComment.vue'
                }).then((response) => {
                    console.log(response);
                    this.status = "Commented!";
-                   this.nested_comment = response.data;
-                   console.log(this.nested_comment);
+                   this.nested_comments.unshift(response.data);
+                   this.nested_commentNum++
                }).catch((error) => {
                    console.log(error);
                    this.status = "Failed to comment!";
                })
+            },
+            update: function(data) {
+                console.log(data);
+                for(let i=0; i<this.nested_comments.length; i++) {
+                    if(this.nested_comments[i].id == data.id) {
+                        this.nested_comments.splice(i, 1, data)
+                    }
+                }
+            },
+            deleteUpdate: function(data) {
+                console.log(data);
+                for(let i=0; i<this.nested_comments.length; i++) {
+                    if(this.nested_comments[i].id == data) {
+                        this.nested_comments.splice(i, 1)
+                    }
+                }
+                this.nested_commentNum--
             }
         }, 
         mounted () {

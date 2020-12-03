@@ -119,8 +119,8 @@ import axios from 'axios'
             goToHome: function() {
                 this.$store.dispatch("getAllUsers");
                 this.$store.dispatch("getAllTweets");
-                // this.$store.dispatch("getUserFollowing");
-                this.$router.push("Home")
+                this.$store.dispatch("getFollowing");
+                this.$router.push("/home")
             },
             createTweet: function() {
                 this.$router.push("/tweet");

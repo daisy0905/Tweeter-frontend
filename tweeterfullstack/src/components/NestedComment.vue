@@ -56,7 +56,8 @@ import axios from 'axios'
                         content: this.nested_content
                     }
                 }).then((response) => {
-                    console.log(response);
+                    console.log(response.data);
+                    this.$emit("update", response.data)
                     this.status = "Updated!";
                 }).catch((error) => {
                     console.log(error);
@@ -76,6 +77,7 @@ import axios from 'axios'
                     }
                 }).then((response) => {
                     console.log(response);
+                    this.$emit("deleteUpdate", this.nested_comment.id)
                 }).catch((error) => {
                     console.log(error);
                 }) 
