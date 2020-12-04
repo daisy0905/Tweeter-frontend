@@ -55,7 +55,6 @@ import cookies from 'vue-cookies'
 import ViewATweet from '../components/ViewATweet.vue'
 import ARetweet from '../components/ARetweet.vue'
 import axios from 'axios'
-
     export default {
         components: {
             ViewATweet,
@@ -143,8 +142,8 @@ import axios from 'axios'
             deleteRetweet: function(data) {
                 console.log(data)
                 for(let i=0; i<this.retweets.length; i++) {
-                    if(this.retweet[i].id == data) {
-                        this.retweet.splice(i, 1)
+                    if(this.retweets[i].id == data) {
+                        this.retweets.splice(i, 1)
                     }
                 }
             }
@@ -192,7 +191,6 @@ import axios from 'axios'
     padding: 0;
     box-sizing: border-box;
 }
-
 #profile {
     min-height: 100vh;
     width: 100%;
@@ -200,7 +198,6 @@ import axios from 'axios'
     justify-items: center;
     align-items: center; 
 }
-
 #header {
     min-height: 40vh;
     width: 100%;
@@ -208,7 +205,6 @@ import axios from 'axios'
     justify-items: center;
     align-items: center;
 }
-
 #container-1 {
     height: 5vh;
     width: 100%;
@@ -217,17 +213,14 @@ import axios from 'axios'
     align-items: center;
     grid-template-columns: 10% 15% 45% 30%;
     margin-bottom: 1em;
-
     img {
         width: 5vw;
     }
-
     h3 {
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
     }
-
     button {
         width: 25vw;
         height: 5vh;
@@ -240,34 +233,29 @@ import axios from 'axios'
         font-weight: bold;
     }
 }
-
 #container-2 {
     min-height: 20vh;
     width: 100%;
     display: grid;
     justify-items: center;
     align-items: center;
-
     img {
         width: 100%;
         height: 20vh;
         object-fit: cover;
     }
 }
-
 #container-3 {
     min-height: 10vh;
     width: 100%;
     display: grid;
     grid-template-columns: 70% 30%;
-
     #user-image {
         width: 100%;
         min-height: 10vh;
         display: grid;
         grid-template-rows: 80% 20%;
         position: relative;
-
         img {
             width: 100px;
             height: 100px;
@@ -281,7 +269,6 @@ import axios from 'axios'
             top: -5vh;
             border: 2px solid white;
         }
-
         h3 {
             font-weight: bold; 
             font-family: Arial, Helvetica, sans-serif;
@@ -292,13 +279,11 @@ import axios from 'axios'
             left: 12vw;
         }
     }
-
     #profile-btn {
         display: grid;
         justify-items: center;
         align-items: center;
         width: 100%;
-
         button {
             width: 25vw;
             height: 5vh;
@@ -312,7 +297,6 @@ import axios from 'axios'
         }
     }
 }
-
 #container-4 {
     height: 5vh;
     width: 90%;
@@ -320,13 +304,11 @@ import axios from 'axios'
     justify-items: left;
     align-items: center;
     margin-top: 4vh;
-
     h4 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem; 
         margin-bottom: 1em;
     }
-
     h5 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.7rem; 
@@ -334,7 +316,6 @@ import axios from 'axios'
         margin: 0.3em 0 0.3em 0;
     }
 }
-
 #container-5 {
     height: 5vh;
     width: 100%;
@@ -343,8 +324,6 @@ import axios from 'axios'
     align-items: center;
     grid-template-columns: 1fr 1fr;
     margin-top: 3em;
-
-
     .user-follow {
         height: 5vh;
         width: 100%;
@@ -352,14 +331,12 @@ import axios from 'axios'
         justify-items: center;
         align-items: center;
         grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
-
         h5 {
             font-weight: bold; 
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
             color: #AAB8C2;
         }
-
         h4 {
             font-weight: bold; 
             font-family: Arial, Helvetica, sans-serif;
@@ -368,7 +345,6 @@ import axios from 'axios'
         }
     }
 }
-
 #container-6 {
     height: 5vh;
     width: 100%;
@@ -376,7 +352,6 @@ import axios from 'axios'
     justify-items: center;
     align-items: center;
     margin-top: 2em;
-
     .tweet-btn {
         width: 30vw;
         height: 5vh;
@@ -389,12 +364,10 @@ import axios from 'axios'
         font-weight: bold;
     }
 }
-
 .tweets {
     min-height: 5vh;
     width: 90%;
 }
-
 #tweet-icon {
         height: 10vh;
         width: 100%;
@@ -402,7 +375,6 @@ import axios from 'axios'
         align-items: center;
         justify-items: center;
         z-index: 50;
-
         img {
             position: fixed;
             bottom: 20vh;
@@ -411,5 +383,4 @@ import axios from 'axios'
             z-index: 10;
         }
     }
-
 </style>

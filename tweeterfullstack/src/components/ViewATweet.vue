@@ -208,7 +208,6 @@ import ProfileCard from './ProfileCard.vue'
     padding: 0;
     box-sizing: border-box;
 }
-
 .tweet-unit {
     min-height: 5vh;
     width: 90%;
@@ -216,7 +215,6 @@ import ProfileCard from './ProfileCard.vue'
     justify-items: center;
     align-items: center; 
 }
-
 .container-1 {
     width: 100%;
     height: 5vh;
@@ -227,26 +225,22 @@ import ProfileCard from './ProfileCard.vue'
     background-color:  #E1E8ED;
     border-bottom: 1px solid #1DA1F2;
     margin-top: 0.5em;
-
     h3 {
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
         position: relative;
     }
-
     h4 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem; 
         color: #657786;
     }
-
     .profile-card {
         width: 60%;
         position: absolute;
 }
 }
-
 .container-2 {
     width: 80%;
     min-height: 5vh;
@@ -254,12 +248,10 @@ import ProfileCard from './ProfileCard.vue'
     justify-items: center;
     align-items: center; 
     margin-top: 0.5em;
-
     img {
         width: 100%;
         border-radius: 2em 2em 0 0;
     }
-
     p {
         width: 100%;
         height: 10vh;
@@ -270,7 +262,6 @@ import ProfileCard from './ProfileCard.vue'
         border-radius: 0 0 2em 2em;
     }
 }
-
 .container-3 {
     width: 100%;
     height: 5vh;
@@ -280,7 +271,6 @@ import ProfileCard from './ProfileCard.vue'
     margin-top: 1em;
     grid-template-columns: 5% repeat(4, 1fr) 5%;
     
-
     .unit-1 {
         height: 100%;
         width: 100%;
@@ -288,11 +278,9 @@ import ProfileCard from './ProfileCard.vue'
         justify-items: center;
         align-items: center;
         grid-template-columns: 1fr 1.5fr;
-
         img {
             width: 20px;
         }
-
         h5 {
             font-weight: bold; 
             font-family: Arial, Helvetica, sans-serif;
@@ -308,7 +296,6 @@ import ProfileCard from './ProfileCard.vue'
         justify-items: center;
         align-items: center;
         grid-template-columns: 1fr 1.5fr;
-
         .number {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 0.8rem;
@@ -320,7 +307,6 @@ import ProfileCard from './ProfileCard.vue'
             width: 20px;
         }
     }
-
     .unit-3 {
     width: 100%;
     height: 5vh;
@@ -328,7 +314,6 @@ import ProfileCard from './ProfileCard.vue'
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr; 
-
         img {
             width: 20px;
             font-family: Arial, Helvetica, sans-serif;
@@ -338,7 +323,6 @@ import ProfileCard from './ProfileCard.vue'
             background-color: white;
         }
     }
-
     .unit-4 {
         width: 90%;
         height: 100%;
@@ -348,7 +332,6 @@ import ProfileCard from './ProfileCard.vue'
         grid-template-columns: 1fr 1fr;
     }
 }
-
 .container-4 {
     width: 100%;
     min-height: 30vh;
@@ -356,5 +339,4 @@ import ProfileCard from './ProfileCard.vue'
     justify-items: center;
     align-items: center; 
 }
-
 </style>

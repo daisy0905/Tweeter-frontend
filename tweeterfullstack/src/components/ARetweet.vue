@@ -23,7 +23,6 @@
 <script>
 import cookies from 'vue-cookies'
 import axios from 'axios'
-
     export default {
         name: "aretweet",
         props: {
@@ -77,7 +76,6 @@ import axios from 'axios'
     padding: 0;
     box-sizing: border-box;
 }
-
 .retweet {
     min-height: 5vh;
     width: 90%;
@@ -89,7 +87,6 @@ import axios from 'axios'
     padding-bottom: 1em;
     margin: 0.5em 0 0 0;
 }
-
 .container-1 {
     width: 100%;
     height: 5vh;
@@ -100,20 +97,17 @@ import axios from 'axios'
     background-color:  #E1E8ED;
     border-bottom: 1px solid #1DA1F2;
     margin-top: 0.5em;
-
     h3 {
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
     }
-
     h4 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem; 
         color: #657786;
     }
 }
-
 .container-2 {
     width: 90%;
     height: 5vh;
@@ -121,20 +115,17 @@ import axios from 'axios'
     display: grid;
     justify-items: center;
     align-items: center; 
-
     h3 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
         color: #657786;
     }
-
     h4 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem;
         color: #657786; 
     }
 }
-
 .container-3 {
     width: 100%;
     height: 10vh;
@@ -152,20 +143,17 @@ import axios from 'axios'
         font-size: 0.8rem;
         text-align: center;
     }
-
     .unit-1 {
         width: 100%;
         height: 100%;
         display: grid;
         justify-items: center;
         align-items: center;
-
         img {
             width: 20px;
         }
     }
 }
-
 .container-4 {
     p {
         width: 90%;
