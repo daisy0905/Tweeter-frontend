@@ -371,19 +371,19 @@ import axios from 'axios'
 }
 
 #tweet-icon {
-        height: 10vh;
-        width: 100%;
-        display: grid;
-        align-items: center;
-        justify-items: center;
+    height: 10vh;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
 
-        img {
-            position: fixed;
-            bottom: 20vh;
-            right: 2vw;
-            width: 15%;
-            z-index: 10;
-        }
+    img {
+        position: fixed;
+        bottom: 20vh;
+        right: 2vw;
+        width: 15%;
+        z-index: 10;
     }
+}
 
 </style>

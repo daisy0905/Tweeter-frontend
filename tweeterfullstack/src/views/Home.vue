@@ -49,6 +49,7 @@
 <script>
 
 import cookies from 'vue-cookies'
+import axios from 'axios'
 import ViewAllTweets from '../components/ViewAllTweets.vue'
 import ViewAllUsers from '../components/ViewAllUsers.vue'
 import DeleteProfile from '../components/DeleteProfile.vue'
@@ -96,20 +97,42 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                 this.$router.push("/userintro");
             },
             userLogout: function() {
-                cookies.remove("decoUserImage");
-                cookies.remove("loginToken");
-                cookies.remove("userId");
-                cookies.remove("tweetContent");
-                cookies.remove("tweetTweetId");
-                cookies.remove("userCommentId");
-                cookies.remove("userName");
-                cookies.remove("otherId");
-                cookies.remove("tweetUsername");
-                cookies.remove("tweetTime");
-                cookies.remove("userPicture");
-                cookies.remove("userContent");
-                cookies.remove("userTweetId");
-                this.$router.push("/login");
+                axios.request({
+                    url: "http://127.0.0.1:5000/login",
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                       token: this.token,
+                    }
+                }).then((response) => {
+                    console.log(response);
+                    cookies.remove("loginToken");
+                    cookies.remove("userId");
+                    cookies.remove("tweetContent");
+                    cookies.remove("tweetTweetId");
+                    cookies.remove("userCommentId");
+                    cookies.remove("userName");
+                    cookies.remove("otherId");
+                    cookies.remove("tweetUsername");
+                    cookies.remove("tweetTime");
+                    cookies.remove("userImage");
+                    cookies.remove("userCreation");
+                    cookies.remove("userTweetId");
+                    cookies.remove("userEmail");
+                    cookies.remove("tweetTime");
+                    cookies.remove("userBio");
+                    cookies.remove("userBirthdate");
+                    cookies.remove("image");
+                    cookies.remove("bio");
+                    cookies.remove("name");
+                    cookies.remove("birthdate");
+                    cookies.remove("created_at");
+                    this.$router.push("/login");
+                }).catch((error) => {
+                    console.log(error);
+                }) 
             },
             deleteProfile: function() {
                 this.display =! this.display;
@@ -231,6 +254,7 @@ import DeleteProfile from '../components/DeleteProfile.vue'
                     background-color: white;
                     border: 2px solid  #1DA1F2;
                     border-radius: 0.8em;
+                    text-align: center;
                 }
 
                 img {

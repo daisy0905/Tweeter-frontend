@@ -20,6 +20,9 @@ import SearchTweets from '../components/SearchTweets.vue'
             SearchTweets
         },
         methods: {
+            goToHome: function() {
+                this.$router.push("/home")
+            },
             refresh: function() {
                 this.getSearchTweets();
             }

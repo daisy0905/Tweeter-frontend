@@ -78,7 +78,6 @@ import axios from 'axios'
            }
         },
         mounted () {
-            // this.$store.dispatch("getUserFollowing");
             this.followCheck();
         }
     }

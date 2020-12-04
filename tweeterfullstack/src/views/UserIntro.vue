@@ -41,8 +41,11 @@
             <div id="container-6">
                 <button class="tweet-btn" @click="viewTweets">Tweets</button>
             </div>
-            <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet"></a-retweet>
+            <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet" @deleteRetweet="deleteRetweet"></a-retweet>
             <view-a-tweet class="tweets" v-for="tweet in tweets" :key="tweet.id" :tweet="tweet" :retweet="retweet"></view-a-tweet>
+        </div>
+        <div id="tweet-icon">
+            <img @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
         </div>
     </div>
 </template>
@@ -137,6 +140,14 @@ import axios from 'axios'
             createTweet: function() {
                 this.$router.push("/tweet");
             },
+            deleteRetweet: function(data) {
+                console.log(data)
+                for(let i=0; i<this.retweets.length; i++) {
+                    if(this.retweet[i].id == data) {
+                        this.retweet.splice(i, 1)
+                    }
+                }
+            }
         },
         mounted () {
             this.getTweets();
@@ -390,6 +401,7 @@ import axios from 'axios'
         display: grid;
         align-items: center;
         justify-items: center;
+        z-index: 50;
 
         img {
             position: fixed;

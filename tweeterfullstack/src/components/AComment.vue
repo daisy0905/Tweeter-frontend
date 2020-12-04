@@ -5,6 +5,7 @@
             <h4>{{ comment.created_at }}</h4>
         </div>
         <div class="container-2">
+            <img :src="comment.image" alt="the image of comment">
             <p>{{ comment.content }}</p>
         </div>
         <div class="container-3">
@@ -281,6 +282,10 @@ import NestedComment from './NestedComment.vue'
     align-items: center; 
     margin-top: 0.5em;
     
+    img {
+        width: 150px;
+        border-radius: 1em;
+    }
 
     p {
     width: 90%;

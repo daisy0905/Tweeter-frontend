@@ -21,6 +21,11 @@
             <div id="text">
                 <textarea id="comment-area" v-model="content"></textarea>
             </div>
+            <div id="image">
+                <h3>Comment Image URL</h3>
+                <input type="text" class="input" v-model="commentImage">
+                <img :src="commentImage" alt="image preview">
+            </div>
         </div>
         <div id="comment-btn">
             <button @click="createComment">Reply</button>
@@ -45,6 +50,7 @@ import axios from 'axios'
                 tweet: cookies.get("tweetContent"),
                 date: cookies.get("tweetTime"),
                 content: "",
+                commentImage: "https://www.pinclipart.com/picdir/middle/123-1239505_rain-cloud-clipart-black-and-white-free-download.png",
                 comment: {},
                 commentStatus: "Comment!"
             }
@@ -70,7 +76,8 @@ import axios from 'axios'
                    data: {
                        token: this.token,
                        content: this.content,
-                       tweet_id: this.userTweetId
+                       tweet_id: this.userTweetId,
+                       image: this.commentImage
                    }
                }).then((response) => {
                    console.log(response);
@@ -92,7 +99,8 @@ import axios from 'axios'
                     data: {
                         token: this.token,
                         id: cookies.get("userCommentId"),
-                        content: this.content
+                        content: this.content,
+                        image: this.commentImage
                     }
                 }).then((response) => {
                     console.log(response);
@@ -179,7 +187,7 @@ import axios from 'axios'
 }
 
 #reply {
-    min-height: 10vh;
+    min-height: 30vh;
     width: 100%;
     display: grid;
     justify-items: center;
@@ -187,21 +195,22 @@ import axios from 'axios'
 
     #image {
         width: 100%;
-        height: 100%;
+        height: 5vh;
         display: grid;
         justify-items: center;
         align-items: center;
 
         img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
             border-radius: 50%;
         }
     }
 
     #text {
-        width: 90%;
-        height: 25vh;
+        width: 80%;
+        height: 20vh;
         display: grid;
         justify-items: center;
         align-items: center;
@@ -210,6 +219,36 @@ import axios from 'axios'
         #comment-area {
             width: 100%;
             height: 100%;
+        }
+    }
+
+    #image {
+        min-height: 10vh;
+        width: 100%;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        margin-bottom: 1em;
+
+        h3 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 1em 0 1em 0;
+        }
+
+        .input {
+            width: 80%;
+            height: 7vh;
+            background-color: #E1E8ED;
+            border: 1px solid #AAB8C2;
+            margin: 0 0 1em 0;
+            border-bottom: 1px solid #1DA1F2;
+            text-align: center;
+        }
+
+        img {
+            width: 100px;
         }
     }
 }
@@ -221,6 +260,7 @@ import axios from 'axios'
     justify-items: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
+    margin-top: 15vh;
 
     button {
         width: 25vw;
@@ -235,7 +275,7 @@ import axios from 'axios'
     }
 }
 
-h3 { 
+    h3 { 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
         text-align: left;

@@ -36,7 +36,7 @@ import axios from 'axios'
                 UserPhoto: cookies.get("userImage"),
                 token: cookies.get("loginToken"),
                 content: "",
-                image: "",
+                image: "https://www.pinclipart.com/picdir/middle/123-1239505_rain-cloud-clipart-black-and-white-free-download.png",
                 tweet: {},
                 tweetStatus: "Tweets!",
             }

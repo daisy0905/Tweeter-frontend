@@ -2,7 +2,6 @@
     <div class="retweet">
         <div class="container-1">
             <h3>{{ retweet.name }}</h3>
-            <!-- <h4>{{ tweet.created_at }}</h4> -->
             <div></div>
         </div>
         <div class="container-2">
@@ -56,6 +55,7 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response);
                     this.status = "Deleted!";
+                    this.$emit("deleteRetweet", this.retweet.id)
                 }).catch((error) => {
                     console.log(error);
                     this.status = "Failed!";

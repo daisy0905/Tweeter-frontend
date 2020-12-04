@@ -10,9 +10,10 @@
         <textarea id="bio-input" class="input" v-model="bio"></textarea>
         <h3>Email</h3>
         <input type="text" id="email-input" class="input" v-model="email">
-        <p>User Image URL</p>
+        <h3>User Image URL</h3>
         <input type="text" id="image-input" class="input" v-model="image">
         <button class="btn" @click="signup">Sign Up</button>
+        <h3>{{ status }}</h3>
     </div>
 </template>
 
@@ -28,7 +29,8 @@ import axios from 'axios'
                 birthdate: "YYYY-MM-DD",
                 bio: "",
                 email: "",
-                image: ""
+                image: "",
+                status: ""
             }
         },
         methods: {
@@ -48,10 +50,12 @@ import axios from 'axios'
                         image: this.image
                     }
                 }).then((response) => {
-                   console.log(response);
-                   this.$router.push("/");
+                    console.log(response);
+                    this.status = "Success!"
+                    setTimeout(()=>{this.$router.push("/")}, 2000);
                 }).catch((error) => {
-                   console.log(error)
+                    console.log(error)
+                    this.status = "Failed!"
                 })
             }
         }
@@ -104,6 +108,13 @@ import axios from 'axios'
             background-color: #1DA1F2;
             color: white;
         }
+    }
+
+    h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-top: 0.5em;
     }
 }
 </style>
