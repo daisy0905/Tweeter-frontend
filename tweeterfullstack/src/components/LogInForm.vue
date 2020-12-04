@@ -3,7 +3,7 @@
         <h3>username</h3>
         <input type="text" id="username-input" class="input" v-model="username">
         <h3>Password</h3>
-        <input type="text" id="password-input" class="input" v-model="password">
+        <input type="password" id="password-input" class="input" v-model="password">
         <button class="btn" @click="login">Log in</button>
         <h3>{{ loginStatus }}</h3>
     </div>

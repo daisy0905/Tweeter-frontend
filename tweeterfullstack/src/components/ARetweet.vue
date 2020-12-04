@@ -2,17 +2,19 @@
     <div class="retweet">
         <div class="container-1">
             <h3>{{ retweet.name }}</h3>
+            <h4>{{ retweet.createdAt }}</h4>
             <div></div>
         </div>
         <div class="container-2">
             <h3>{{ retweet.username }}</h3>
             <h4>{{ retweet.created_at }}</h4>
-        </div>
-        <div class="container-3">
-            <p>{{ retweet.content }}</p>
             <div class="unit-1">
                 <img v-if="retweet.user_id == logId" @click="deleteRetweet" src="../assets/retweet-icon.png" alt="retweet icon">
             </div>
+        </div>
+        <div class="container-3">
+            <img :src="retweet.image" alt="the image of retweet">
+            <p>{{ retweet.content }}</p>
         </div>
         <div class="container-4" v-if="display == true">
             <p>{{ status }}</p>
@@ -111,7 +113,7 @@ import axios from 'axios'
 .container-2 {
     width: 90%;
     height: 5vh;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 30% 50% 20%;
     display: grid;
     justify-items: center;
     align-items: center; 
@@ -120,29 +122,13 @@ import axios from 'axios'
         font-size: 1rem;
         color: #657786;
     }
+
     h4 {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8rem;
         color: #657786; 
     }
-}
-.container-3 {
-    width: 100%;
-    height: 10vh;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    grid-template-columns: 80% 10% 10%; 
-    border: 1px solid #1DA1F2;
-    border-radius: 1em;
-    padding: 1em 0 1em 0;
-    
-    p {
-        width: 90%;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        text-align: center;
-    }
+
     .unit-1 {
         width: 100%;
         height: 100%;
@@ -154,6 +140,31 @@ import axios from 'axios'
         }
     }
 }
+
+.container-3 {
+    width: 80%;
+    min-height: 5vh;
+    display: grid;
+    justify-items: center;
+    align-items: center; 
+    margin-top: 0.5em;
+
+    img {
+        width: 100%;
+        border-radius: 2em 2em 0 0;
+    }
+
+    p {
+        width: 100%;
+        height: 10vh;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8rem;
+        padding: 0.5em 0 0 0.5em;
+        background-color: lightgrey;
+        border-radius: 0 0 2em 2em;
+    }
+}
+
 .container-4 {
     p {
         width: 90%;

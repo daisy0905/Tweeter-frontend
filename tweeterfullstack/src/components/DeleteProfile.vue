@@ -1,7 +1,7 @@
 <template>
     <div id="delete-profile">
         <h3>Please input your password</h3>
-        <input type="text" id="password-input" v-model="password">
+        <input type="password" id="password-input" v-model="password">
         <button @click="deleteProfile">Confirm</button>
         <h3>{{ status }}</h3>
     </div>
@@ -36,12 +36,28 @@ import axios from 'axios'
                 }).then((response) => {
                     console.log(response);
                     this.status = "Account has been deleted!";
-                    cookies.remove("userTweetId");
-                    cookies.remove("userName");
-                    cookies.remove("userId");
                     cookies.remove("loginToken");
-                    cookies.remove("userImage")
-                    this.$router.push("/");
+                    cookies.remove("userId");
+                    cookies.remove("tweetContent");
+                    cookies.remove("tweetTweetId");
+                    cookies.remove("userCommentId");
+                    cookies.remove("userName");
+                    cookies.remove("otherId");
+                    cookies.remove("tweetUsername");
+                    cookies.remove("tweetTime");
+                    cookies.remove("userImage");
+                    cookies.remove("userCreation");
+                    cookies.remove("userTweetId");
+                    cookies.remove("userEmail");
+                    cookies.remove("tweetTime");
+                    cookies.remove("userBio");
+                    cookies.remove("userBirthdate");
+                    cookies.remove("image");
+                    cookies.remove("bio");
+                    cookies.remove("name");
+                    cookies.remove("birthdate");
+                    cookies.remove("created_at");
+                    setTimeout(()=>{this.$router.push("/")}, 2000);
                 }).catch((error) => {
                     console.log(error);
                     this.status = "Error";

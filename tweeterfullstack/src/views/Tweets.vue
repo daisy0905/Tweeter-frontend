@@ -4,7 +4,6 @@
             <img @click="goToHome" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSvz8HF_jjIpaNgkrFzcw9E2N9Y6SA13DfCcQ&usqp=CAU" alt="icon of back to home page">
             <h3>Back To Home</h3>
             <div></div>  
-            <button @click="refresh">Refresh</button>
         </div>
         <div id="tweet-container">
             <h2>Discover</h2>
@@ -22,9 +21,6 @@ import SearchTweets from '../components/SearchTweets.vue'
         methods: {
             goToHome: function() {
                 this.$router.push("/home")
-            },
-            refresh: function() {
-                this.getSearchTweets();
             }
         },
     }
@@ -52,7 +48,7 @@ import SearchTweets from '../components/SearchTweets.vue'
     display: grid;
     justify-items: left;
     align-items: center;
-    grid-template-columns: 10% 45% 15% 30%;
+    grid-template-columns: 10% 45% 45%;
     margin-bottom: 1em;
 
     img {
@@ -63,18 +59,6 @@ import SearchTweets from '../components/SearchTweets.vue'
         font-weight: bold; 
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1rem;
-    }
-
-    button {
-        width: 25vw;
-        height: 5vh;
-        background-color: white;
-        color: #1DA1F2;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        border: 1px solid  #1DA1F2;
-        border-radius: 1.5em;
-        font-weight: bold;
     }
 }
 
