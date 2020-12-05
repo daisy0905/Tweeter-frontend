@@ -36,7 +36,7 @@ import cookies from 'vue-cookies'
             userId: {
                 type: Number
             } 
-        }
+        },
     }
 </script>
 

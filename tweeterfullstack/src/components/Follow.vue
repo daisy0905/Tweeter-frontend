@@ -35,7 +35,7 @@ import axios from 'axios'
             },
             createFollow: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/follows",
+                    url: "https://daisyfulltweeter.ml/api/follows",
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ import axios from 'axios'
             },
             deleteFollow: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/follows",
+                    url: "https://daisyfulltweeter.ml/api/follows",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

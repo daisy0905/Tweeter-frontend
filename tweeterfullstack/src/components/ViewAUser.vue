@@ -30,7 +30,7 @@ import axios from 'axios'
         methods: {
             getProfile: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/users",
+                url: "https://daisyfulltweeter.ml/api/users",
                    method: "GET",
                    headers: {
                     "Content-Type": "application/json",
@@ -46,8 +46,8 @@ import axios from 'axios'
                     cookies.set("created_at", response.data[0].created_at)
                     cookies.set("image", response.data[0].image)
                     cookies.set("otherId", response.data[0].id)
-                    // this.$store.dispatch("getFollowing");
-                    setTimeout(()=>{this.$router.push("/profile")}, 3000);
+                    this.$store.dispatch("getFollowing");
+                    setTimeout(()=>{this.$router.push("/profile")}, 2000);
                 }).catch((error) => {
                     console.log(error);
                 })

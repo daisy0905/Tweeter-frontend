@@ -73,7 +73,7 @@ import ProfileCard from './ProfileCard.vue'
             },
             deleteTweet: function() {
                 axios.request({
-                   url: "http://127.0.0.1:5000/tweets",
+                   url: "https://daisyfulltweeter.ml/api/tweets",
                    method: "DELETE",
                    headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ import ProfileCard from './ProfileCard.vue'
             },
             getComments: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/comments",
+                url: "https://daisyfulltweeter.ml/api/comments",
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -119,7 +119,7 @@ import ProfileCard from './ProfileCard.vue'
             },
             getLike: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/tweet-likes",
+                url: "https://daisyfulltweeter.ml/api/tweet-likes",
                 method: "GET",
                 headers: {
                 "Content-Type": "application/json",
@@ -143,7 +143,7 @@ import ProfileCard from './ProfileCard.vue'
             },
             createLike: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/tweet-likes",
+                    url: "https://daisyfulltweeter.ml/api/tweet-likes",
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -162,7 +162,7 @@ import ProfileCard from './ProfileCard.vue'
             },
             deleteLike: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/tweet-likes",
+                    url: "https://daisyfulltweeter.ml/api/tweet-likes",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

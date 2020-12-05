@@ -36,7 +36,7 @@ import axios from 'axios'
         methods: {
             signup: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/users",
+                    url: "https://daisyfulltweeter.ml/api/users",
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",

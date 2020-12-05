@@ -98,7 +98,7 @@ import DeleteProfile from '../components/DeleteProfile.vue'
             },
             userLogout: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/login",
+                    url: "https://daisyfulltweeter.ml/api/login",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

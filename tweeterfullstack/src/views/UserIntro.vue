@@ -89,7 +89,7 @@ import axios from 'axios'
             },
             getTweets: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/tweets",
+                url: "https://daisyfulltweeter.ml/api/tweets",
                    method: "GET",
                    headers: {
                     "Content-Type": "application/json",
@@ -107,7 +107,7 @@ import axios from 'axios'
             },
             getRetweets: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/retweets",
+                url: "https://daisyfulltweeter.ml/api/retweets",
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

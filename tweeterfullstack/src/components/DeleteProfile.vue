@@ -24,7 +24,7 @@ import axios from 'axios'
             deleteProfile: function() {
                 this.Status = "Loading"
                 axios.request({
-                   url: "http://127.0.0.1:5000/users",
+                   url: "https://daisyfulltweeter.ml/api/users",
                    method: "DELETE",
                    headers: {
                     "Content-Type": "application/json",

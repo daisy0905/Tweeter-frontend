@@ -25,7 +25,7 @@ import cookies from 'vue-cookies'
             login: function() {
                 this.loginStatus = "Loading"
                 axios.request({
-                    url: "http://127.0.0.1:5000/login",
+                    url: "https://daisyfulltweeter.ml/api/login",
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",

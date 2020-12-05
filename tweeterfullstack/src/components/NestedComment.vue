@@ -6,7 +6,7 @@
         </div>
         <div class="container-2">
             <p>{{ nested_comment.content }}</p>
-            <div class="unit" v-if="nested_comment.username == logUser">
+            <div class="unit" v-if="nested_comment.user_id == logUser">
                 <img @click="goToComment" src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-512.png" alt="update icon">
                 <img @click="deleteNestedComment" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST1mtZCRWh6vOvjwovfizM2BvKFMTiCDawFw&usqp=CAU" alt="delete icon">
             </div>
@@ -45,7 +45,7 @@ import axios from 'axios'
             },
             updateNestedComment: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/nested-comments",
+                    url: "https://daisyfulltweeter.ml/api/nested-comments",
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ import axios from 'axios'
             },
             deleteNestedComment: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/nested-comments",
+                    url: "https://daisyfulltweeter.ml/api/nested-comments",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ import axios from 'axios'
         },
         computed: {
             logUser() {
-                return cookies.get('userName') 
+                return cookies.get('userId') 
             }
         },
         

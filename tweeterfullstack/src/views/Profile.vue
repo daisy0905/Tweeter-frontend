@@ -42,7 +42,7 @@
                 <button class="tweet-btn" @click="viewTweets">Tweets</button>
             </div>
         </div>
-        <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet"></a-retweet>
+        <a-retweet class="tweets" v-for="retweet in retweets" :key="retweet.id" :retweet="retweet" @deleteRetweet="deleteRetweet"></a-retweet>
         <view-a-tweet class="tweets" v-for="tweet in othertweets" :key="tweet.id" :tweet="tweet"></view-a-tweet>
         <div id="tweet-icon">
             <img v-if="name== logUser" @click="createTweet" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQAXoPQzntYQAVY308mROLyPuRp1smbeMQ30g&usqp=CAU" alt="icon of write tweet">
@@ -82,6 +82,7 @@ import axios from 'axios'
         methods: {
             refresh: function() {
                 this.getTweets();
+                this.getRetweets()
             },
             viewProfile: function() {
                 this.$store.dispatch("getProfile");
@@ -92,7 +93,7 @@ import axios from 'axios'
             },
             getTweets: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/tweets",
+                url: "https://daisyfulltweeter.ml/api/tweets",
                    method: "GET",
                    headers: {
                     "Content-Type": "application/json",
@@ -110,11 +111,11 @@ import axios from 'axios'
             },
             getFollowing: function() {
                 this.$store.dispatch("getFollowing");
-                this.$router.push("/follow");
+                setTimeout(()=>{this.$router.push("/follow")}, 2000);
             },
             getFollower: function() {
                 this.$store.dispatch("getFollower");
-                this.$router.push("/follow");
+                setTimeout(()=>{this.$router.push("/follow")}, 2000);
             },
             goToHome: function() {
                 this.$store.dispatch("getAllUsers");
@@ -127,7 +128,7 @@ import axios from 'axios'
             },
             getRetweets: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/retweets",
+                url: "https://daisyfulltweeter.ml/api/retweets",
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -142,6 +143,14 @@ import axios from 'axios'
                     console.log(error)
                 })
             },
+            deleteRetweet: function(data) {
+                console.log(data)
+                for(let i=0; i<this.retweets.length; i++) {
+                    if(this.retweets[i].id == data) {
+                        this.retweets.splice(i, 1)
+                    }
+                }
+            }
         },
         mounted () {
             this.getTweets();
@@ -382,7 +391,7 @@ import axios from 'axios'
         bottom: 20vh;
         right: 2vw;
         width: 15%;
-        z-index: 10;
+        z-index: 50;
     }
 }
 

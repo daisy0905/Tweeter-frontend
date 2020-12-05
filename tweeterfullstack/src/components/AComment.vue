@@ -80,7 +80,7 @@ import NestedComment from './NestedComment.vue'
             },
             deleteComment: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/comments",
+                    url: "https://daisyfulltweeter.ml/api/comments",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ import NestedComment from './NestedComment.vue'
             },
             getCommentLike: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/comment-likes",
+                url: "https://daisyfulltweeter.ml/api/comment-likes",
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -122,7 +122,7 @@ import NestedComment from './NestedComment.vue'
             },
             createLike: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/comment-likes",
+                    url: "https://daisyfulltweeter.ml/api/comment-likes",
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -141,7 +141,7 @@ import NestedComment from './NestedComment.vue'
             },
             deleteLike: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/comment-likes",
+                    url: "https://daisyfulltweeter.ml/api/comment-likes",
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -160,7 +160,7 @@ import NestedComment from './NestedComment.vue'
             },
             getNestedComments: function() {
                 axios.request({
-                url: "http://127.0.0.1:5000/nested-comments",
+                url: "https://daisyfulltweeter.ml/api/nested-comments",
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -179,7 +179,7 @@ import NestedComment from './NestedComment.vue'
             },
             createNestedComment: function() {
                 axios.request({
-                   url: "http://127.0.0.1:5000/nested-comments",
+                   url: "https://daisyfulltweeter.ml/api/nested-comments",
                    method: "POST",
                    headers: {
                     "Content-Type": "application/json",
@@ -283,7 +283,7 @@ import NestedComment from './NestedComment.vue'
     margin-top: 0.5em;
     
     img {
-        width: 150px;
+        height: 100px;
         border-radius: 1em;
     }
 

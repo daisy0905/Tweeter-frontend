@@ -55,7 +55,7 @@ export default new Vuex.Store({
     getProfile: function(state) {
       console.log(cookies.get("userId"));
       axios.request({
-        url: "http://127.0.0.1:5000/users",
+        url: "https://daisyfulltweeter.ml/api/users",
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default new Vuex.Store({
 
     getTweets: function(context) {
       axios.request({
-        url: "http://127.0.0.1:5000/tweets",
+        url: "https://daisyfulltweeter.ml/api/tweets",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default new Vuex.Store({
     },
     getAllTweets: function(context) {
       axios.request({
-        url: "http://127.0.0.1:5000/tweets",
+        url: "https://daisyfulltweeter.ml/api/tweets",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default new Vuex.Store({
     },
     getAllUsers: function(state) {
       axios.request({
-        url: "http://127.0.0.1:5000/users",
+        url: "https://daisyfulltweeter.ml/api/users",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export default new Vuex.Store({
     },
     getUserFollowing: function(state) {
       axios.request({
-        url: "http://127.0.0.1:5000/follows",
+        url: "https://daisyfulltweeter.ml/api/follows",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export default new Vuex.Store({
     },
     getFollowing: function(state) {
       axios.request({
-        url: "http://127.0.0.1:5000/follows",
+        url: "https://daisyfulltweeter.ml/api/follows",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export default new Vuex.Store({
     },
     getFollower: function(state) {
       axios.request({
-        url: "http://127.0.0.1:5000/followers",
+        url: "https://daisyfulltweeter.ml/api/followers",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export default new Vuex.Store({
     },
     getUserFollower: function(state) {
       axios.request({
-        url: "http://127.0.0.1:5000/followers",
+        url: "https://daisyfulltweeter.ml/api/followers",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +190,7 @@ export default new Vuex.Store({
     },
     getAllRetweets: function(context) {
       axios.request({
-        url: "http://127.0.0.1:5000/retweets",
+        url: "https://daisyfulltweeter.ml/api/retweets",
         method: "GET",
         headers: {
           "Content-Type": "application/json",

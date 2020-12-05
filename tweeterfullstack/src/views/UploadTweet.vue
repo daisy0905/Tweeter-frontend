@@ -51,7 +51,7 @@ import axios from 'axios'
             createTweet: function() {
                 this.tweetStatus = "Tweeting!"
                 axios.request({
-                   url: "http://127.0.0.1:5000/tweets",
+                   url: "https://daisyfulltweeter.ml/api/tweets",
                    method: "POST",
                    headers: {
                     "Content-Type": "application/json",
@@ -74,7 +74,7 @@ import axios from 'axios'
            },
            updateTweet: function() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/tweets",
+                    url: "https://daisyfulltweeter.ml/api/tweets",
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
