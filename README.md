@@ -1,2 +1,2 @@
 # Tweeter-frontend
-TweeterPt2
+It is a Full-Stack Tweeter Project
